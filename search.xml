@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Vim编辑器操作</title>
+    <url>/2023/02/09/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091715565.png"></p>
+<span id="more"></span>
+
+<p>在 vim 编辑器中搜索关键词 “keyword”</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/keyword</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在搜索的结果中跳到下一个：<code>N</code></li>
+<li>在搜索的结果中跳到前一个：<code>n</code></li>
+</ul>
+<p>在 vim 编辑器中</p>
+<ul>
+<li><p>显示行号：<code>:set nu</code></p>
+</li>
+<li><p>跳到行号为 n 的行：<code>nG</code></p>
+</li>
+<li><p>跳到文件的底部：<code>G</code></p>
+</li>
+<li><p>跳到文件的头部：<code>g</code></p>
+</li>
+<li><p>删除当前行在内的往下 n 行：<code>ndd</code></p>
+</li>
+<li><p>复制从光标开始往右的 n 个单词：<code>nyw</code></p>
+</li>
+<li><p>将包括当前行在内的往下 n 行复制到缓冲区中：<code>nyy</code></p>
+</li>
+<li><p>撤销上一步操作：<code>u</code></p>
+</li>
+<li><p>粘贴缓冲区（剪切板）里的内容到光标后：<code>p</code></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Vim</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Windows命令行代理加速</title>
     <url>/2023/02/08/Windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091403848.png" alt="CMD图标"></p>
@@ -100,40 +142,6 @@
       </tags>
   </entry>
   <entry>
-    <title>文章阴影添加</title>
-    <url>/2023/02/09/%E6%96%87%E7%AB%A0%E9%98%B4%E5%BD%B1%E6%B7%BB%E5%8A%A0/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091531160.png" alt="Hexo 中文文档| Hexo 中文网"></p>
-<p>在 hexo 博客中使用了 next 主题，可以使用这篇博文中的方法来给博客中的文章边框加上阴影</p>
-<span id="more"></span>
-
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>打开 <code>themes\next\source\css\_common\components\post</code> 目录，在该目录中对 <strong>post.styl</strong> 文件进行编辑</p>
-<p>使用快捷键找到 <code>motion.transition.post_block</code> 这一项（文件中只有一个位置）</p>
-<p>将下列 if 语句</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.use-motion</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">hexo-config</span>(<span class="string">&#x27;motion.transition.post_block&#x27;</span>)) &#123;</span><br><span class="line">    <span class="selector-class">.post-block</span>, <span class="selector-class">.pagination</span>, <span class="selector-class">.comments</span> &#123;</span><br><span class="line">      <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>修改成</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.use-motion</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">hexo-config</span>(<span class="string">&#x27;motion.transition.post_block&#x27;</span>)) &#123;</span><br><span class="line">        .post-block&#123;</span><br><span class="line">            <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">            <span class="attribute">margin-top</span>: <span class="number">60px</span>;</span><br><span class="line">            <span class="attribute">margin-bottom</span>: <span class="number">60px</span>;</span><br><span class="line">            <span class="attribute">padding</span>: <span class="number">25px</span>;</span><br><span class="line">            -webkit-<span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgba</span>(<span class="number">202</span>, <span class="number">203</span>, <span class="number">203</span>, <span class="number">1</span>);</span><br><span class="line">            -moz-<span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgba</span>(<span class="number">202</span>, <span class="number">203</span>, <span class="number">204</span>, <span class="number">1</span>);</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="selector-class">.pagination</span>, <span class="selector-class">.comments</span> &#123;</span><br><span class="line">            <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后去掉这个文件中的</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;post-eof&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>然后…然后就大功告成了</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091531808.png" alt="image-20230209152955170"></p>
-<blockquote>
-<p>ps. 之后可以使用 <code>hexo s</code> 在本地看看效果，然后再决定是否同步到 github 上</p>
-</blockquote>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="https://zhuanlan.zhihu.com/p/468831542">Hexo+Next为首页文章添加边框阴影[绝对有效] - 知乎</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>分页表格界面</title>
     <url>/2023/02/08/%E5%88%86%E9%A1%B5%E8%A1%A8%E6%A0%BC%E7%95%8C%E9%9D%A2/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091437412.png"></p>
@@ -198,6 +206,40 @@
       </tags>
   </entry>
   <entry>
+    <title>文章阴影添加</title>
+    <url>/2023/02/09/%E6%96%87%E7%AB%A0%E9%98%B4%E5%BD%B1%E6%B7%BB%E5%8A%A0/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091531160.png" alt="Hexo 中文文档| Hexo 中文网"></p>
+<p>在 hexo 博客中使用了 next 主题，可以使用这篇博文中的方法来给博客中的文章边框加上阴影</p>
+<span id="more"></span>
+
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>打开 <code>themes\next\source\css\_common\components\post</code> 目录，在该目录中对 <strong>post.styl</strong> 文件进行编辑</p>
+<p>使用快捷键找到 <code>motion.transition.post_block</code> 这一项（文件中只有一个位置）</p>
+<p>将下列 if 语句</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.use-motion</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">hexo-config</span>(<span class="string">&#x27;motion.transition.post_block&#x27;</span>)) &#123;</span><br><span class="line">    <span class="selector-class">.post-block</span>, <span class="selector-class">.pagination</span>, <span class="selector-class">.comments</span> &#123;</span><br><span class="line">      <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改成</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.use-motion</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">hexo-config</span>(<span class="string">&#x27;motion.transition.post_block&#x27;</span>)) &#123;</span><br><span class="line">        .post-block&#123;</span><br><span class="line">            <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">            <span class="attribute">margin-top</span>: <span class="number">60px</span>;</span><br><span class="line">            <span class="attribute">margin-bottom</span>: <span class="number">60px</span>;</span><br><span class="line">            <span class="attribute">padding</span>: <span class="number">25px</span>;</span><br><span class="line">            -webkit-<span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgba</span>(<span class="number">202</span>, <span class="number">203</span>, <span class="number">203</span>, <span class="number">1</span>);</span><br><span class="line">            -moz-<span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgba</span>(<span class="number">202</span>, <span class="number">203</span>, <span class="number">204</span>, <span class="number">1</span>);</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="selector-class">.pagination</span>, <span class="selector-class">.comments</span> &#123;</span><br><span class="line">            <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后去掉这个文件中的</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;post-eof&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>然后…然后就大功告成了</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091531808.png" alt="image-20230209152955170"></p>
+<blockquote>
+<p>ps. 之后可以使用 <code>hexo s</code> 在本地看看效果，然后再决定是否同步到 github 上</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/468831542">Hexo+Next为首页文章添加边框阴影[绝对有效] - 知乎</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>版本兼容问题</title>
     <url>/2023/02/05/%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091437412.png"></p>
@@ -223,6 +265,33 @@
         <tag>Vue3</tag>
         <tag>Ant Design Vue</tag>
         <tag>问题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>表格布局中的小误区</title>
+    <url>/2023/02/10/%E8%A1%A8%E6%A0%BC%E5%B8%83%E5%B1%80%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%AF%AF%E5%8C%BA/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091437412.png"></p>
+<p>在表格布局中的 layout 前面加了个冒号 <code>:</code>，搞得我弄了半天</p>
+<span id="more"></span>
+
+<h3 id="教训"><a href="#教训" class="headerlink" title="教训"></a>教训</h3><p>以后在参考像是 Ant Design Vue 这样的 UI 组件库中的样式时，最好选择的是非常相似的，不需要改动太多的，不然，可能一个小小的问题，会折磨你一整天</p>
+<h3 id="踩坑经过"><a href="#踩坑经过" class="headerlink" title="踩坑经过"></a>踩坑经过</h3><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302102331654.gif" alt="1676042690"></p>
+<p>API 上写着 layout 是用于表单布局的，类型是字符串且只有三个可选值：<code>horizontal | vertical | inline</code>，下面是这段代码</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a-form</span> <span class="attr">:layout</span>=<span class="string">&quot;formState.layout&quot;</span> <span class="attr">:model</span>=<span class="string">&quot;formState&quot;</span> <span class="attr">v-bind</span>=<span class="string">&quot;formItemLayout&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a-form-item</span> <span class="attr">label</span>=<span class="string">&quot;Form Layout&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a-radio-group</span> <span class="attr">v-model:value</span>=<span class="string">&quot;formState.layout&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-radio-button</span> <span class="attr">value</span>=<span class="string">&quot;horizontal&quot;</span>&gt;</span>Horizontal<span class="tag">&lt;/<span class="name">a-radio-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-radio-button</span> <span class="attr">value</span>=<span class="string">&quot;vertical&quot;</span>&gt;</span>Vertical<span class="tag">&lt;/<span class="name">a-radio-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-radio-button</span> <span class="attr">value</span>=<span class="string">&quot;inline&quot;</span>&gt;</span>Inline<span class="tag">&lt;/<span class="name">a-radio-button</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">a-radio-group</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a-form-item</span> <span class="attr">label</span>=<span class="string">&quot;Field A&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a-input</span> <span class="attr">v-model:value</span>=<span class="string">&quot;formState.fieldA&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;input placeholder&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a-form-item</span> <span class="attr">label</span>=<span class="string">&quot;Field B&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a-input</span> <span class="attr">v-model:value</span>=<span class="string">&quot;formState.fieldB&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;input placeholder&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a-form-item</span> <span class="attr">:wrapper-col</span>=<span class="string">&quot;buttonItemLayout.wrapperCol&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span>&gt;</span>Submit<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">a-form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>于是，我模仿着写</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;a-form :layout=&quot;inline&quot; :wrapperCol=&quot;&#123;span: 30&#125;&quot;&gt;</span><br><span class="line">    &lt;a-form-item &gt;</span><br><span class="line">    	&lt;a-input v-model:value=&quot;searchName&quot; placeholder=&quot;input placeholder&quot; /&gt;</span><br><span class="line">    &lt;/a-form-item&gt;</span><br><span class="line">    &lt;a-form-item&gt;</span><br><span class="line">    	&lt;a-button type=&quot;primary&quot;&gt;Submit&lt;/a-button&gt;</span><br><span class="line">    &lt;/a-form-item&gt;</span><br><span class="line">&lt;/a-form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>始终不行，后面看网上都是去掉冒号的代码，于是，我去掉之后，就可以了</p>
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>之后我发现在文档中有另一个样式的代码中就直接使用了 layout，而没有加引号</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302102331482.png" alt="image-20230210230916668"></p>
+<p>不太明白为什么写文档的人不区分一下这两种，让我这样的菜鸟真的很难受</p>
+]]></content>
+      <tags>
+        <tag>Ant Design Vue</tag>
+        <tag>前端</tag>
+        <tag>Vue</tag>
+        <tag>教训</tag>
       </tags>
   </entry>
 </search>
