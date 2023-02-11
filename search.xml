@@ -73,30 +73,6 @@
       </tags>
   </entry>
   <entry>
-    <title>不能正确显示中文文件名</title>
-    <url>/2023/02/09/%E4%B8%8D%E8%83%BD%E6%AD%A3%E7%A1%AE%E6%98%BE%E7%A4%BA%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091219899.png" alt="git图标"></p>
-<span id="more"></span>
-
-<p>git bash 无法正确显示中文文件名</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217123.png" alt="image-20230209114257524"></p>
-<p>从网上搜索到了这样的解决方法</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath false</span><br></pre></td></tr></table></figure>
-
-<p>我现在的这种显示中文文件名的需求仅仅是在这个仓库中才有，在我其他项目中的 commit message 中的中文都能正确显示，为避免这个配置对其他项目产生影响，遂采用本地配置来解决问题</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --local core.quotepath false</span><br></pre></td></tr></table></figure>
-
-<p>问题解决</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217328.png" alt="image-20230209120007574"></p>
-]]></content>
-      <categories>
-        <category>开发工具</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用NVM管理nodejs</title>
     <url>/2023/02/09/%E4%BD%BF%E7%94%A8NVM%E7%AE%A1%E7%90%86nodejs/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091626867.png"></p>
@@ -206,6 +182,34 @@
       </tags>
   </entry>
   <entry>
+    <title>版本兼容问题</title>
+    <url>/2023/02/05/%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091437412.png"></p>
+<p>又一个教训，前端开发一定要注意版本号的匹配，高版本不一定兼容低版本，这种 UI 组件也不能掉以轻心</p>
+<span id="more"></span>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>组件的版本要与文档的版本配套</strong></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657929.png" alt="image-20230205133928955"></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657801.png" alt="image-20230205134047973"></p>
+<h3 id="踩坑经过"><a href="#踩坑经过" class="headerlink" title="踩坑经过"></a>踩坑经过</h3><p>今天在 Vue3 中引入 Ant Design Vue 后，跟着视频教程走，下一步就是布局</p>
+<p>在官网复制以下 css </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">31px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">24px</span> <span class="number">16px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ant-row-rtl</span> <span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">0</span> <span class="number">16px</span> <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-layout-background</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>.log</code> 选择器始终处于灰色，IDEA 也提示该选择器处于没有生效的状态，自然，它所涉及的 css 也没有生效</p>
+<p>后面才知道是 <strong>Ant Design Vue 版本</strong>的问题</p>
+<p>我当时选择的是 <code>2.0.0-rc.3</code>，可是官网上的 <code>2.X</code> 版本的文档指定了是 <code>2.2.8</code>，当时是看到了，本来以为没什么，谁想到在第一步就出现了问题</p>
+<p>后面换成了 <code>2.2.8</code> 之后，尽管还是处于灰色的状态，但是页面已经恢复正常了</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Vue3</tag>
+        <tag>Ant Design Vue</tag>
+        <tag>问题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>文章阴影添加</title>
     <url>/2023/02/09/%E6%96%87%E7%AB%A0%E9%98%B4%E5%BD%B1%E6%B7%BB%E5%8A%A0/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091531160.png" alt="Hexo 中文文档| Hexo 中文网"></p>
@@ -240,31 +244,27 @@
       </tags>
   </entry>
   <entry>
-    <title>版本兼容问题</title>
-    <url>/2023/02/05/%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091437412.png"></p>
-<p>又一个教训，前端开发一定要注意版本号的匹配，高版本不一定兼容低版本，这种 UI 组件也不能掉以轻心</p>
+    <title>不能正确显示中文文件名</title>
+    <url>/2023/02/09/%E4%B8%8D%E8%83%BD%E6%AD%A3%E7%A1%AE%E6%98%BE%E7%A4%BA%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091219899.png" alt="git图标"></p>
 <span id="more"></span>
 
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>组件的版本要与文档的版本配套</strong></p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657929.png" alt="image-20230205133928955"></p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657801.png" alt="image-20230205134047973"></p>
-<h3 id="踩坑经过"><a href="#踩坑经过" class="headerlink" title="踩坑经过"></a>踩坑经过</h3><p>今天在 Vue3 中引入 Ant Design Vue 后，跟着视频教程走，下一步就是布局</p>
-<p>在官网复制以下 css </p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">31px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">24px</span> <span class="number">16px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ant-row-rtl</span> <span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">0</span> <span class="number">16px</span> <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-layout-background</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>git bash 无法正确显示中文文件名</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217123.png" alt="image-20230209114257524"></p>
+<p>从网上搜索到了这样的解决方法</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath false</span><br></pre></td></tr></table></figure>
 
-<p>其中 <code>.log</code> 选择器始终处于灰色，IDEA 也提示该选择器处于没有生效的状态，自然，它所涉及的 css 也没有生效</p>
-<p>后面才知道是 <strong>Ant Design Vue 版本</strong>的问题</p>
-<p>我当时选择的是 <code>2.0.0-rc.3</code>，可是官网上的 <code>2.X</code> 版本的文档指定了是 <code>2.2.8</code>，当时是看到了，本来以为没什么，谁想到在第一步就出现了问题</p>
-<p>后面换成了 <code>2.2.8</code> 之后，尽管还是处于灰色的状态，但是页面已经恢复正常了</p>
+<p>我现在的这种显示中文文件名的需求仅仅是在这个仓库中才有，在我其他项目中的 commit message 中的中文都能正确显示，为避免这个配置对其他项目产生影响，遂采用本地配置来解决问题</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --local core.quotepath false</span><br></pre></td></tr></table></figure>
+
+<p>问题解决</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217328.png" alt="image-20230209120007574"></p>
 ]]></content>
       <categories>
-        <category>前端</category>
+        <category>开发工具</category>
       </categories>
       <tags>
-        <tag>Vue3</tag>
-        <tag>Ant Design Vue</tag>
-        <tag>问题</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
