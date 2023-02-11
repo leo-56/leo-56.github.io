@@ -73,6 +73,71 @@
       </tags>
   </entry>
   <entry>
+    <title>不能正确显示中文文件名</title>
+    <url>/2023/02/09/%E4%B8%8D%E8%83%BD%E6%AD%A3%E7%A1%AE%E6%98%BE%E7%A4%BA%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091219899.png" alt="git图标"></p>
+<span id="more"></span>
+
+<p>git bash 无法正确显示中文文件名</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217123.png" alt="image-20230209114257524"></p>
+<p>从网上搜索到了这样的解决方法</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath false</span><br></pre></td></tr></table></figure>
+
+<p>我现在的这种显示中文文件名的需求仅仅是在这个仓库中才有，在我其他项目中的 commit message 中的中文都能正确显示，为避免这个配置对其他项目产生影响，遂采用本地配置来解决问题</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --local core.quotepath false</span><br></pre></td></tr></table></figure>
+
+<p>问题解决</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217328.png" alt="image-20230209120007574"></p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用CloudFlare解析国内域名</title>
+    <url>/2023/02/11/%E4%BD%BF%E7%94%A8CloudFlare%E8%A7%A3%E6%9E%90%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111029317.png"></p>
+<p>我在去年在阿里云上买了个域名，本来想直接用在这个博客上的</p>
+<p>可是，要进行域名备案，他才给解析</p>
+<p>无奈，只能投靠 CloudFlare 的怀抱，使用它提供的免费 DNS 解析服务来对我在阿里云上的域名进行解析</p>
+<span id="more"></span>
+
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>第一步：注册 CF 账号</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111025201.jpg"></p>
+<p>第二步：在 CF 上添加站点</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111031381.png" alt="image-20230211095254984"></p>
+<p>然后它就会监测该域名目前使用的 DNS 服务器，并且提供两个它的服务器</p>
+<p>目前使用的 DNS 服务器就是阿里云的，接下来就要去阿里云将 DNS 服务器替换成 CF 为我们提供的</p>
+<p>第三步：替换 DNS 服务器地址</p>
+<p>登录阿里云之后，进入该域名的管理界面</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032262.png" alt="image-20230211100039492"></p>
+<p>在左侧栏选择 DNS 修改，之后修改成 CF 为我们提供的 DNS 即可</p>
+<blockquote>
+<p>修改完后，在原 CF 的界面选择操作完成</p>
+</blockquote>
+<p>第四步：等待 CF 发邮件</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032534.png" alt="image-20230211100937900"></p>
+<p>第五步：在 CF 中配置 DNS Records</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032093.png" alt="image-20230211101413224"></p>
+<p>第六步：在 github 中配置自定义域名</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032431.png" alt="image-20230211101535403"></p>
+<p>第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032789.png" alt="image-20230211102058259"></p>
+<p>编辑 hexo 的配置文件 <strong>_config.yml</strong> (非主题的配置文件)，查找关键词 permalink，修改这一部分第一行的 url 地址为博客网站访问地址即可</p>
+]]></content>
+      <categories>
+        <category>博客网站</category>
+      </categories>
+      <tags>
+        <tag>域名</tag>
+        <tag>阿里云</tag>
+        <tag>CloudFlare</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用NVM管理nodejs</title>
     <url>/2023/02/09/%E4%BD%BF%E7%94%A8NVM%E7%AE%A1%E7%90%86nodejs/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091626867.png"></p>
@@ -182,34 +247,6 @@
       </tags>
   </entry>
   <entry>
-    <title>版本兼容问题</title>
-    <url>/2023/02/05/%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091437412.png"></p>
-<p>又一个教训，前端开发一定要注意版本号的匹配，高版本不一定兼容低版本，这种 UI 组件也不能掉以轻心</p>
-<span id="more"></span>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>组件的版本要与文档的版本配套</strong></p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657929.png" alt="image-20230205133928955"></p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657801.png" alt="image-20230205134047973"></p>
-<h3 id="踩坑经过"><a href="#踩坑经过" class="headerlink" title="踩坑经过"></a>踩坑经过</h3><p>今天在 Vue3 中引入 Ant Design Vue 后，跟着视频教程走，下一步就是布局</p>
-<p>在官网复制以下 css </p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">31px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">24px</span> <span class="number">16px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ant-row-rtl</span> <span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">0</span> <span class="number">16px</span> <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-layout-background</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>.log</code> 选择器始终处于灰色，IDEA 也提示该选择器处于没有生效的状态，自然，它所涉及的 css 也没有生效</p>
-<p>后面才知道是 <strong>Ant Design Vue 版本</strong>的问题</p>
-<p>我当时选择的是 <code>2.0.0-rc.3</code>，可是官网上的 <code>2.X</code> 版本的文档指定了是 <code>2.2.8</code>，当时是看到了，本来以为没什么，谁想到在第一步就出现了问题</p>
-<p>后面换成了 <code>2.2.8</code> 之后，尽管还是处于灰色的状态，但是页面已经恢复正常了</p>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>Vue3</tag>
-        <tag>Ant Design Vue</tag>
-        <tag>问题</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>文章阴影添加</title>
     <url>/2023/02/09/%E6%96%87%E7%AB%A0%E9%98%B4%E5%BD%B1%E6%B7%BB%E5%8A%A0/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091531160.png" alt="Hexo 中文文档| Hexo 中文网"></p>
@@ -244,27 +281,31 @@
       </tags>
   </entry>
   <entry>
-    <title>不能正确显示中文文件名</title>
-    <url>/2023/02/09/%E4%B8%8D%E8%83%BD%E6%AD%A3%E7%A1%AE%E6%98%BE%E7%A4%BA%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091219899.png" alt="git图标"></p>
+    <title>版本兼容问题</title>
+    <url>/2023/02/05/%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091437412.png"></p>
+<p>又一个教训，前端开发一定要注意版本号的匹配，高版本不一定兼容低版本，这种 UI 组件也不能掉以轻心</p>
 <span id="more"></span>
 
-<p>git bash 无法正确显示中文文件名</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217123.png" alt="image-20230209114257524"></p>
-<p>从网上搜索到了这样的解决方法</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath false</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>组件的版本要与文档的版本配套</strong></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657929.png" alt="image-20230205133928955"></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657801.png" alt="image-20230205134047973"></p>
+<h3 id="踩坑经过"><a href="#踩坑经过" class="headerlink" title="踩坑经过"></a>踩坑经过</h3><p>今天在 Vue3 中引入 Ant Design Vue 后，跟着视频教程走，下一步就是布局</p>
+<p>在官网复制以下 css </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">31px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">24px</span> <span class="number">16px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ant-row-rtl</span> <span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">0</span> <span class="number">16px</span> <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-layout-background</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>我现在的这种显示中文文件名的需求仅仅是在这个仓库中才有，在我其他项目中的 commit message 中的中文都能正确显示，为避免这个配置对其他项目产生影响，遂采用本地配置来解决问题</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --local core.quotepath false</span><br></pre></td></tr></table></figure>
-
-<p>问题解决</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217328.png" alt="image-20230209120007574"></p>
+<p>其中 <code>.log</code> 选择器始终处于灰色，IDEA 也提示该选择器处于没有生效的状态，自然，它所涉及的 css 也没有生效</p>
+<p>后面才知道是 <strong>Ant Design Vue 版本</strong>的问题</p>
+<p>我当时选择的是 <code>2.0.0-rc.3</code>，可是官网上的 <code>2.X</code> 版本的文档指定了是 <code>2.2.8</code>，当时是看到了，本来以为没什么，谁想到在第一步就出现了问题</p>
+<p>后面换成了 <code>2.2.8</code> 之后，尽管还是处于灰色的状态，但是页面已经恢复正常了</p>
 ]]></content>
       <categories>
-        <category>开发工具</category>
+        <category>前端</category>
       </categories>
       <tags>
-        <tag>Git</tag>
+        <tag>Vue3</tag>
+        <tag>Ant Design Vue</tag>
+        <tag>问题</tag>
       </tags>
   </entry>
   <entry>
