@@ -73,30 +73,6 @@
       </tags>
   </entry>
   <entry>
-    <title>不能正确显示中文文件名</title>
-    <url>/2023/02/09/%E4%B8%8D%E8%83%BD%E6%AD%A3%E7%A1%AE%E6%98%BE%E7%A4%BA%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091219899.png" alt="git图标"></p>
-<span id="more"></span>
-
-<p>git bash 无法正确显示中文文件名</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217123.png" alt="image-20230209114257524"></p>
-<p>从网上搜索到了这样的解决方法</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath false</span><br></pre></td></tr></table></figure>
-
-<p>我现在的这种显示中文文件名的需求仅仅是在这个仓库中才有，在我其他项目中的 commit message 中的中文都能正确显示，为避免这个配置对其他项目产生影响，遂采用本地配置来解决问题</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --local core.quotepath false</span><br></pre></td></tr></table></figure>
-
-<p>问题解决</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217328.png" alt="image-20230209120007574"></p>
-]]></content>
-      <categories>
-        <category>开发工具</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>代码生成器无法生成xxxByPrimaryKey</title>
     <url>/2023/02/11/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E6%97%A0%E6%B3%95%E7%94%9F%E6%88%90xxxByPrimaryKey/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111326316.png"></p>
@@ -124,6 +100,73 @@
       </tags>
   </entry>
   <entry>
+    <title>不能正确显示中文文件名</title>
+    <url>/2023/02/09/%E4%B8%8D%E8%83%BD%E6%AD%A3%E7%A1%AE%E6%98%BE%E7%A4%BA%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091219899.png" alt="git图标"></p>
+<span id="more"></span>
+
+<p>git bash 无法正确显示中文文件名</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217123.png" alt="image-20230209114257524"></p>
+<p>从网上搜索到了这样的解决方法</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath false</span><br></pre></td></tr></table></figure>
+
+<p>我现在的这种显示中文文件名的需求仅仅是在这个仓库中才有，在我其他项目中的 commit message 中的中文都能正确显示，为避免这个配置对其他项目产生影响，遂采用本地配置来解决问题</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --local core.quotepath false</span><br></pre></td></tr></table></figure>
+
+<p>问题解决</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217328.png" alt="image-20230209120007574"></p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>代码生成器配置去除表名前缀</title>
+    <url>/2023/02/11/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E9%85%8D%E7%BD%AE%E5%8E%BB%E9%99%A4%E8%A1%A8%E5%90%8D%E5%89%8D%E7%BC%80/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111326316.png"></p>
+<span id="more"></span>
+
+<p>续接<a href="http://blog.jmings.top/2023/02/11/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E6%97%A0%E6%B3%95%E7%94%9F%E6%88%90xxxByPrimaryKey/">上回</a>，我搞定了代码生成器不生成 xxxByPrimaryKey 系列语句的问题</p>
+<p>当时采用的是加表名前缀解决的，所以：</p>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">category ==&gt; wiki_category</span><br></pre></td></tr></table></figure>
+
+<p>可是，这样生成的代码，就以 entity 举例，就变成了这样：</p>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">Category ==&gt; WikiCategory</span><br></pre></td></tr></table></figure>
+
+<p>我之前代码本来就快改完了，这么多类的类名变成了这样的格式之后，我又产生了另一个问题：</p>
+<blockquote>
+<p>这样的话，相关方法名需不需要修改？比如说：saveCategory ==&gt; saveWikiCategory 呢？</p>
+</blockquote>
+<p>秉持着多一事不如少一事的原则，我决定要去掉表名前缀，就变成之前那样，只不过数据库表名还要留有前缀，不然又会报之前的错误</p>
+<p>或许这种需求也会在今后的项目中用到，谁知道呢</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>在网上搜索后，最后找到了官方文档中的这个页面：</p>
+<blockquote>
+<p><a href="https://mybatis.org/generator/configreference/domainObjectRenamingRule.html">MyBatis Generator Core – The <domainObjectRenamingRule> Element</a></p>
+</blockquote>
+<p>文档中说，可以使用 <code>&lt;domainObjectRenamingRule&gt;</code> 这个元素来解决问题，而这个元素又是 <code>&lt;table&gt;</code> 的子元素</p>
+<p>我当前使用的 MBG 的版本是：<strong>1.4.0</strong>，官方目前的版本是：1.4.0</p>
+<blockquote>
+<p>在 XML 中比较直接的搞清楚当前版本是否支持该特性的方法就是直接放进去，看报不报错了，也可以进入父元素的文件中，对该元素进行检索，如果有的话，大概是支持的，如果以后使用的是比较老的版本，可以用这个方法看新特性是否在旧版本的 MBG 中是否支持</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111456245.png" alt="table"></p>
+</blockquote>
+<p>我目前的这个版本是支持的，于是直接在配置文件中加入下列代码</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 去掉表前缀 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;wiki%&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">domainObjectRenamingRule</span> <span class="attr">searchString</span>=<span class="string">&quot;^Wiki&quot;</span> <span class="attr">replaceString</span>=<span class="string">&quot;&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>问题解决</p>
+]]></content>
+      <categories>
+        <category>Mybatis</category>
+      </categories>
+      <tags>
+        <tag>Mybatis Generator</tag>
+        <tag>MySQL</tag>
+        <tag>问题解决</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用CloudFlare解析国内域名</title>
     <url>/2023/02/11/%E4%BD%BF%E7%94%A8CloudFlare%E8%A7%A3%E6%9E%90%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111029317.png"></p>
@@ -145,6 +188,9 @@
 <h4 id="第四步：等待-CF-发邮件"><a href="#第四步：等待-CF-发邮件" class="headerlink" title="第四步：等待 CF 发邮件"></a>第四步：等待 CF 发邮件</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032534.png" alt="image-20230211100937900"></p>
 <h4 id="第五步：在-CF-中配置-DNS-Records"><a href="#第五步：在-CF-中配置-DNS-Records" class="headerlink" title="第五步：在 CF 中配置 DNS Records"></a>第五步：在 CF 中配置 DNS Records</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032093.png" alt="image-20230211101413224"></p>
 <h4 id="第六步：在-github-中配置自定义域名"><a href="#第六步：在-github-中配置自定义域名" class="headerlink" title="第六步：在 github 中配置自定义域名"></a>第六步：在 github 中配置自定义域名</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032431.png" alt="image-20230211101535403"></p>
+<blockquote>
+<p>这里同样需要在本地 hexo 的 source 文件夹中建立一个 CNAME 文件，文件内容与 github 中刚生成的 CNAME 保持一致即可</p>
+</blockquote>
 <h4 id="第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址"><a href="#第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址" class="headerlink" title="第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址"></a>第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032789.png" alt="image-20230211102058259"></p>
 <p>编辑 hexo 的配置文件 <strong>_config.yml</strong> (非主题的配置文件)，查找关键词 permalink，修改这一部分第一行的 url 地址为博客网站访问地址即可</p>
 ]]></content>
