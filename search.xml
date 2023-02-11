@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Windows命令行代理加速</title>
+    <url>/2023/02/08/Windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091403848.png" alt="CMD图标"></p>
+<p>前段时间搭建这个博客的时候，在最后提交时，一直显示网络问题，最后搞了五六次才总算提交到 github 上了，于是，我就在网上看看有没有什么解决的办法，最后发现了这个可行的办法</p>
+<span id="more"></span>
+
+<p>让 CMD 代理加速其实没那么麻烦，其实非常简单</p>
+<p>不知道是不是这个方法太简单了，所以网上的大佬们都不屑于提了</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>需要使用到 CFW，这个方法就是使用它的一个功能</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>打开主界面的 Allow LAN 开关</li>
+<li>点击 Port 右侧端口号旁边的终端图标</li>
+<li>在弹出的界面中选择 CMD 即可</li>
+</ol>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl https://www.google.com</span><br></pre></td></tr></table></figure>
+
+<p>如果生效的话，响应是一个 html 文件，应该就是首页的那个页面</p>
+<p>如果没有生效的话，会提示超时</p>
+<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><ul>
+<li><a href="https://gist.github.com/dreamlu/cf7cbc0b8329ac145fa44342d6a1c01d">输入命令的操作 | gist of github</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>问题解决</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vim编辑器操作</title>
     <url>/2023/02/09/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E6%93%8D%E4%BD%9C/</url>
     <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091715565.png"></p>
@@ -43,39 +73,9 @@
       </tags>
   </entry>
   <entry>
-    <title>Windows命令行代理加速</title>
-    <url>/2023/02/08/Windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091403848.png" alt="CMD图标"></p>
-<p>前段时间搭建这个博客的时候，在最后提交时，一直显示网络问题，最后搞了五六次才总算提交到 github 上了，于是，我就在网上看看有没有什么解决的办法，最后发现了这个可行的办法</p>
-<span id="more"></span>
-
-<p>让 CMD 代理加速其实没那么麻烦，其实非常简单</p>
-<p>不知道是不是这个方法太简单了，所以网上的大佬们都不屑于提了</p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>需要使用到 CFW，这个方法就是使用它的一个功能</p>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
-<li>打开主界面的 Allow LAN 开关</li>
-<li>点击 Port 右侧端口号旁边的终端图标</li>
-<li>在弹出的界面中选择 CMD 即可</li>
-</ol>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl https://www.google.com</span><br></pre></td></tr></table></figure>
-
-<p>如果生效的话，响应是一个 html 文件，应该就是首页的那个页面</p>
-<p>如果没有生效的话，会提示超时</p>
-<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><ul>
-<li><a href="https://gist.github.com/dreamlu/cf7cbc0b8329ac145fa44342d6a1c01d">输入命令的操作 | gist of github</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>小技巧</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>不能正确显示中文文件名</title>
     <url>/2023/02/09/%E4%B8%8D%E8%83%BD%E6%AD%A3%E7%A1%AE%E6%98%BE%E7%A4%BA%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091219899.png" alt="git图标"></p>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302112005737.png"></p>
 <span id="more"></span>
 
 <p>git bash 无法正确显示中文文件名</p>
@@ -90,10 +90,10 @@
 <p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091217328.png" alt="image-20230209120007574"></p>
 ]]></content>
       <categories>
-        <category>开发工具</category>
+        <category>Git</category>
       </categories>
       <tags>
-        <tag>Git</tag>
+        <tag>问题解决</tag>
       </tags>
   </entry>
   <entry>
@@ -118,46 +118,9 @@
         <category>Mybatis</category>
       </categories>
       <tags>
+        <tag>问题解决</tag>
         <tag>Mybatis Generator</tag>
         <tag>MySQL</tag>
-        <tag>教训</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用CloudFlare解析国内域名</title>
-    <url>/2023/02/11/%E4%BD%BF%E7%94%A8CloudFlare%E8%A7%A3%E6%9E%90%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111029317.png"></p>
-<p>我在去年在阿里云上买了个域名，本来想直接用在这个博客上的</p>
-<p>可是，要进行域名备案，他才给解析</p>
-<p>无奈，只能投靠 CloudFlare 的怀抱，使用它提供的免费 DNS 解析服务来对我在阿里云上的域名进行解析</p>
-<span id="more"></span>
-
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="第一步：注册-CF-账号"><a href="#第一步：注册-CF-账号" class="headerlink" title="第一步：注册 CF 账号"></a>第一步：注册 CF 账号</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111025201.jpg"></p>
-<h4 id="第二步：在-CF-上添加站点"><a href="#第二步：在-CF-上添加站点" class="headerlink" title="第二步：在 CF 上添加站点"></a>第二步：在 CF 上添加站点</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111031381.png" alt="image-20230211095254984"></p>
-<p>然后它就会监测该域名目前使用的 DNS 服务器，并且提供两个它的服务器</p>
-<p>目前使用的 DNS 服务器就是阿里云的，接下来就要去阿里云将 DNS 服务器替换成 CF 为我们提供的</p>
-<h4 id="第三步：替换-DNS-服务器地址"><a href="#第三步：替换-DNS-服务器地址" class="headerlink" title="第三步：替换 DNS 服务器地址"></a>第三步：替换 DNS 服务器地址</h4><p>登录阿里云之后，进入该域名的管理界面</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032262.png" alt="image-20230211100039492"></p>
-<p>在左侧栏选择 DNS 修改，之后修改成 CF 为我们提供的 DNS 即可</p>
-<blockquote>
-<p>修改完后，在原 CF 的界面选择操作完成</p>
-</blockquote>
-<h4 id="第四步：等待-CF-发邮件"><a href="#第四步：等待-CF-发邮件" class="headerlink" title="第四步：等待 CF 发邮件"></a>第四步：等待 CF 发邮件</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032534.png" alt="image-20230211100937900"></p>
-<h4 id="第五步：在-CF-中配置-DNS-Records"><a href="#第五步：在-CF-中配置-DNS-Records" class="headerlink" title="第五步：在 CF 中配置 DNS Records"></a>第五步：在 CF 中配置 DNS Records</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032093.png" alt="image-20230211101413224"></p>
-<h4 id="第六步：在-github-中配置自定义域名"><a href="#第六步：在-github-中配置自定义域名" class="headerlink" title="第六步：在 github 中配置自定义域名"></a>第六步：在 github 中配置自定义域名</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032431.png" alt="image-20230211101535403"></p>
-<blockquote>
-<p>这里同样需要在本地 hexo 的 source 文件夹中建立一个 CNAME 文件，文件内容与 github 中刚生成的 CNAME 保持一致即可</p>
-</blockquote>
-<h4 id="第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址"><a href="#第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址" class="headerlink" title="第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址"></a>第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032789.png" alt="image-20230211102058259"></p>
-<p>编辑 hexo 的配置文件 <strong>_config.yml</strong> (非主题的配置文件)，查找关键词 permalink，修改这一部分第一行的 url 地址为博客网站访问地址即可</p>
-]]></content>
-      <categories>
-        <category>博客网站</category>
-      </categories>
-      <tags>
-        <tag>域名</tag>
-        <tag>阿里云</tag>
-        <tag>CloudFlare</tag>
       </tags>
   </entry>
   <entry>
@@ -183,8 +146,8 @@
 <blockquote>
 <p><a href="https://mybatis.org/generator/configreference/domainObjectRenamingRule.html">MyBatis Generator Core – The <domainObjectRenamingRule> Element</a></p>
 </blockquote>
-<p>文档中说，可以使用 <code>&lt;domainObjectRenamingRule&gt;</code> 这个元素来解决问题，而这个元素又是 <code>&lt;table&gt;</code> 的子元素</p>
-<p>我当前使用的 MBG 的版本是：<strong>1.4.0</strong>，官方目前的版本是：1.4.0</p>
+<p>文档中说，可以使用 <code>&lt;domainObjectRenamingRule&gt;</code> 这个元素来解决问题，而这个元素又是 <code>&lt;table&gt;</code> 的子元素</p>
+<p>我当前使用的 MBG 的版本是：<strong>1.4.0</strong>，官方目前的版本是：1.4.1</p>
 <blockquote>
 <p>在 XML 中比较直接的搞清楚当前版本是否支持该特性的方法就是直接放进去，看报不报错了，也可以进入父元素的文件中，对该元素进行检索，如果有的话，大概是支持的，如果以后使用的是比较老的版本，可以用这个方法看新特性是否在旧版本的 MBG 中是否支持</p>
 <p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111456245.png" alt="table"></p>
@@ -198,9 +161,46 @@
         <category>Mybatis</category>
       </categories>
       <tags>
+        <tag>问题解决</tag>
         <tag>Mybatis Generator</tag>
         <tag>MySQL</tag>
-        <tag>问题解决</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用CloudFlare解析国内域名</title>
+    <url>/2023/02/11/%E4%BD%BF%E7%94%A8CloudFlare%E8%A7%A3%E6%9E%90%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302112008376.png"></p>
+<p>我在去年在阿里云上买了个域名，本来想直接用在这个博客上的</p>
+<p>可是，要进行域名备案，他才给解析</p>
+<p>无奈，只能投靠 CloudFlare 的怀抱，使用它提供的免费 DNS 解析服务来对我在阿里云上的域名进行解析</p>
+<span id="more"></span>
+
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="第一步：注册-CF-账号"><a href="#第一步：注册-CF-账号" class="headerlink" title="第一步：注册 CF 账号"></a>第一步：注册 CF 账号</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111025201.jpg"></p>
+<h4 id="第二步：在-CF-上添加站点"><a href="#第二步：在-CF-上添加站点" class="headerlink" title="第二步：在 CF 上添加站点"></a>第二步：在 CF 上添加站点</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111031381.png" alt="image-20230211095254984"></p>
+<p>然后它就会监测该域名目前使用的 DNS 服务器，并且提供两个它的服务器</p>
+<p>目前使用的 DNS 服务器就是阿里云的，接下来就要去阿里云将 DNS 服务器替换成 CF 为我们提供的</p>
+<h4 id="第三步：替换-DNS-服务器地址"><a href="#第三步：替换-DNS-服务器地址" class="headerlink" title="第三步：替换 DNS 服务器地址"></a>第三步：替换 DNS 服务器地址</h4><p>登录阿里云之后，进入该域名的管理界面</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032262.png" alt="image-20230211100039492"></p>
+<p>在左侧栏选择 DNS 修改，之后修改成 CF 为我们提供的 DNS 即可</p>
+<blockquote>
+<p>修改完后，在原 CF 的界面选择操作完成</p>
+</blockquote>
+<h4 id="第四步：等待-CF-发邮件"><a href="#第四步：等待-CF-发邮件" class="headerlink" title="第四步：等待 CF 发邮件"></a>第四步：等待 CF 发邮件</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032534.png" alt="image-20230211100937900"></p>
+<h4 id="第五步：在-CF-中配置-DNS-Records"><a href="#第五步：在-CF-中配置-DNS-Records" class="headerlink" title="第五步：在 CF 中配置 DNS Records"></a>第五步：在 CF 中配置 DNS Records</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032093.png" alt="image-20230211101413224"></p>
+<h4 id="第六步：在-github-中配置自定义域名"><a href="#第六步：在-github-中配置自定义域名" class="headerlink" title="第六步：在 github 中配置自定义域名"></a>第六步：在 github 中配置自定义域名</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032431.png" alt="image-20230211101535403"></p>
+<blockquote>
+<p>这里同样需要在本地 hexo 的 source 文件夹中建立一个 CNAME 文件，文件内容与 github 中刚生成的 CNAME 保持一致即可</p>
+</blockquote>
+<h4 id="第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址"><a href="#第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址" class="headerlink" title="第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址"></a>第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032789.png" alt="image-20230211102058259"></p>
+<p>编辑 hexo 的配置文件 <strong>_config.yml</strong> (非主题的配置文件)，查找关键词 permalink，修改这一部分第一行的 url 地址为博客网站访问地址即可</p>
+]]></content>
+      <categories>
+        <category>博客网站</category>
+      </categories>
+      <tags>
+        <tag>域名</tag>
+        <tag>阿里云</tag>
+        <tag>CloudFlare</tag>
       </tags>
   </entry>
   <entry>
@@ -241,11 +241,12 @@
 
 ]]></content>
       <categories>
-        <category>前端</category>
+        <category>nodejs</category>
       </categories>
       <tags>
         <tag>NVM</tag>
-        <tag>nodejs</tag>
+        <tag>前端</tag>
+        <tag>开发工具</tag>
       </tags>
   </entry>
   <entry>
@@ -304,11 +305,11 @@
 </ul>
 ]]></content>
       <categories>
-        <category>前端</category>
+        <category>Ant Design Vue</category>
       </categories>
       <tags>
-        <tag>Vue3</tag>
-        <tag>Ant Design Vue</tag>
+        <tag>前端</tag>
+        <tag>Vue</tag>
         <tag>wiki小项目</tag>
       </tags>
   </entry>
@@ -340,7 +341,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>其他</category>
+        <category>博客网站</category>
       </categories>
       <tags>
         <tag>hexo</tag>
@@ -366,12 +367,12 @@
 <p>后面换成了 <code>2.2.8</code> 之后，尽管还是处于灰色的状态，但是页面已经恢复正常了</p>
 ]]></content>
       <categories>
-        <category>前端</category>
+        <category>Ant Design Vue</category>
       </categories>
       <tags>
-        <tag>Vue3</tag>
-        <tag>Ant Design Vue</tag>
-        <tag>问题</tag>
+        <tag>问题解决</tag>
+        <tag>前端</tag>
+        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -394,9 +395,11 @@
 <p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302102331482.png" alt="image-20230210230916668"></p>
 <p>不太明白为什么写文档的人不区分一下这两种，让我这样的菜鸟真的很难受</p>
 ]]></content>
+      <categories>
+        <category>Ant Design Vue</category>
+      </categories>
       <tags>
-        <tag>教训</tag>
-        <tag>Ant Design Vue</tag>
+        <tag>问题解决</tag>
         <tag>前端</tag>
         <tag>Vue</tag>
       </tags>
