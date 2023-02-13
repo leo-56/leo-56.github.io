@@ -1,35 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Antdv版本兼容问题</title>
-    <url>/2023/02/05/Antdv%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h3 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h3><p>又一个教训，前端开发一定要注意版本号的匹配，高版本不一定兼容低版本，这种 UI 组件也不能掉以轻心</p>
-<span id="more"></span>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>组件的版本要与文档的版本配套</strong></p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657929.png" alt="image-20230205133928955"></p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657801.png" alt="image-20230205134047973"></p>
-<h3 id="踩坑经过"><a href="#踩坑经过" class="headerlink" title="踩坑经过"></a>踩坑经过</h3><p>今天在 Vue3 中引入 Ant Design Vue 后，跟着视频教程走，下一步就是布局</p>
-<p>在官网复制以下 css </p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">31px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">24px</span> <span class="number">16px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ant-row-rtl</span> <span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">0</span> <span class="number">16px</span> <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-layout-background</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>.log</code> 选择器始终处于灰色，IDEA 也提示该选择器处于没有生效的状态，自然，它所涉及的 css 也没有生效</p>
-<p>后面才知道是 <strong>Ant Design Vue 版本</strong>的问题</p>
-<p>我当时选择的是 <code>2.0.0-rc.3</code>，可是官网上的 <code>2.X</code> 版本的文档指定了是 <code>2.2.8</code>，当时是看到了，本来以为没什么，谁想到在第一步就出现了问题</p>
-<p>后面换成了 <code>2.2.8</code> 之后，尽管还是处于灰色的状态，但是页面已经恢复正常了</p>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>Ant Design Vue</tag>
-        <tag>问题解决</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Antdv分页表格界面</title>
     <url>/2023/02/08/Antdv%E5%88%86%E9%A1%B5%E8%A1%A8%E6%A0%BC%E7%95%8C%E9%9D%A2/</url>
-    <content><![CDATA[<h3 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h3><p>Vue3 使用 Ant Design Vue 2.2.8 UI 组件实现分页表格界面</p>
+    <content><![CDATA[<p>Vue3 使用 Ant Design Vue 2.2.8 UI 组件实现分页表格界面</p>
 <span id="more"></span>
 
 <h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><p>这里使用了假数据填充表格内容，进一步开发的话，只要用 axios 向后端发送请求，然后使用 ref 来绑定数据就可以了</p>
@@ -89,9 +63,35 @@
       </tags>
   </entry>
   <entry>
+    <title>Antdv版本兼容问题</title>
+    <url>/2023/02/05/Antdv%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>又一个教训，前端开发一定要注意版本号的匹配，高版本不一定兼容低版本，这种 UI 组件也不能掉以轻心</p>
+<span id="more"></span>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>组件的版本要与文档的版本配套</strong></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657929.png" alt="image-20230205133928955"></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657801.png" alt="image-20230205134047973"></p>
+<h3 id="踩坑经过"><a href="#踩坑经过" class="headerlink" title="踩坑经过"></a>踩坑经过</h3><p>今天在 Vue3 中引入 Ant Design Vue 后，跟着视频教程走，下一步就是布局</p>
+<p>在官网复制以下 css </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">31px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">24px</span> <span class="number">16px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ant-row-rtl</span> <span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">0</span> <span class="number">16px</span> <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-layout-background</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>.log</code> 选择器始终处于灰色，IDEA 也提示该选择器处于没有生效的状态，自然，它所涉及的 css 也没有生效</p>
+<p>后面才知道是 <strong>Ant Design Vue 版本</strong>的问题</p>
+<p>我当时选择的是 <code>2.0.0-rc.3</code>，可是官网上的 <code>2.X</code> 版本的文档指定了是 <code>2.2.8</code>，当时是看到了，本来以为没什么，谁想到在第一步就出现了问题</p>
+<p>后面换成了 <code>2.2.8</code> 之后，尽管还是处于灰色的状态，但是页面已经恢复正常了</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Ant Design Vue</tag>
+        <tag>问题解决</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Antdv表格布局中的小误区</title>
     <url>/2023/02/10/Antdv%E8%A1%A8%E6%A0%BC%E5%B8%83%E5%B1%80%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%AF%AF%E5%8C%BA/</url>
-    <content><![CDATA[<h3 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h3><p>在表格布局中的 layout 前面加了个冒号 <code>:</code>，搞得我弄了半天</p>
+    <content><![CDATA[<p>在表格布局中的 layout 前面加了个冒号 <code>:</code>，搞得我弄了半天</p>
 <span id="more"></span>
 
 <h3 id="教训"><a href="#教训" class="headerlink" title="教训"></a>教训</h3><p>以后在参考像是 Ant Design Vue 这样的 UI 组件库中的样式时，最好选择的是非常相似的，不需要改动太多的，不然，可能一个小小的问题，会折磨你一整天</p>
@@ -113,25 +113,6 @@
       <tags>
         <tag>Ant Design Vue</tag>
         <tag>问题解决</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Antdv让页面中的组件间隔一段距离</title>
-    <url>/2023/02/13/Antdv%E8%AE%A9%E7%BB%84%E4%BB%B6%E9%97%B4%E9%97%B4%E9%9A%94%E4%B8%80%E6%AE%B5%E8%B7%9D%E7%A6%BB/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306124.png" alt="image-20230210230040875"></p>
-<p>紧贴着，不太好看，也可能不符合要求</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306380.png" alt="image-20230210230143250"></p>
-<p>只需要将上面的组件或下面的组件使用标签 <code>&lt;p&gt;&lt;/p&gt;</code> 包住就可以了，<code>&lt;div&gt;</code> 还不行</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a-form</span> <span class="attr">layout</span>=<span class="string">&quot;inline&quot;</span> <span class="attr">:wrapperCol</span>=<span class="string">&quot;&#123;span: 40&#125;&quot;</span> <span class="attr">:model</span>=<span class="string">&quot;param&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-input</span> <span class="attr">v-model:value</span>=<span class="string">&quot;param.name&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;search ebook by name&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;handleQuery(&#123;page: 1, size: pagination.pageSize&#125;)&quot;</span>&gt;</span>查找<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;addEbook&quot;</span>&gt;</span>新增<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">a-form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>Ant Design Vue</tag>
-        <tag>wiki项目</tag>
-        <tag>小技巧</tag>
       </tags>
   </entry>
   <entry>
@@ -203,9 +184,28 @@
       </tags>
   </entry>
   <entry>
+    <title>Antdv让页面中的组件间隔一段距离</title>
+    <url>/2023/02/13/Antdv%E8%AE%A9%E7%BB%84%E4%BB%B6%E9%97%B4%E9%97%B4%E9%9A%94%E4%B8%80%E6%AE%B5%E8%B7%9D%E7%A6%BB/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306124.png" alt="image-20230210230040875"></p>
+<p>紧贴着，不太好看，也可能不符合要求</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306380.png" alt="image-20230210230143250"></p>
+<p>只需要将上面的组件或下面的组件使用标签 <code>&lt;p&gt;&lt;/p&gt;</code> 包住就可以了，<code>&lt;div&gt;</code> 还不行</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a-form</span> <span class="attr">layout</span>=<span class="string">&quot;inline&quot;</span> <span class="attr">:wrapperCol</span>=<span class="string">&quot;&#123;span: 40&#125;&quot;</span> <span class="attr">:model</span>=<span class="string">&quot;param&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-input</span> <span class="attr">v-model:value</span>=<span class="string">&quot;param.name&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;search ebook by name&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;handleQuery(&#123;page: 1, size: pagination.pageSize&#125;)&quot;</span>&gt;</span>查找<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;addEbook&quot;</span>&gt;</span>新增<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">a-form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Ant Design Vue</tag>
+        <tag>小技巧</tag>
+        <tag>wiki项目</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo文章阴影添加</title>
     <url>/2023/02/09/Hexo%E6%96%87%E7%AB%A0%E9%98%B4%E5%BD%B1%E6%B7%BB%E5%8A%A0/</url>
-    <content><![CDATA[<h3 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h3><p>在 hexo 博客中使用了 next 主题，可以使用这篇博文中的方法来给博客中的文章边框加上阴影</p>
+    <content><![CDATA[<p>在 hexo 博客中使用了 next 主题，可以使用这篇博文中的方法来给博客中的文章边框加上阴影</p>
 <span id="more"></span>
 
 <h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>打开 <code>themes\next\source\css\_common\components\post</code> 目录，在该目录中对 <strong>post.styl</strong> 文件进行编辑</p>
@@ -420,7 +420,7 @@
   <entry>
     <title>使用CloudFlare解析国内域名</title>
     <url>/2023/02/11/%E4%BD%BF%E7%94%A8CloudFlare%E8%A7%A3%E6%9E%90%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D/</url>
-    <content><![CDATA[<h3 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h3><p>我在去年在阿里云上买了个域名，本来想直接用在这个博客上的</p>
+    <content><![CDATA[<p>我在去年在阿里云上买了个域名，本来想直接用在这个博客上的</p>
 <p>可是，要进行域名备案，他才给解析</p>
 <p>无奈，只能投靠 CloudFlare 的怀抱，使用它提供的免费 DNS 解析服务来对我在阿里云上的域名进行解析</p>
 <span id="more"></span>
