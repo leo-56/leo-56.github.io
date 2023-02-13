@@ -116,6 +116,25 @@
       </tags>
   </entry>
   <entry>
+    <title>Antdv让页面中的组件间隔一段距离</title>
+    <url>/2023/02/13/Antdv%E8%AE%A9%E7%BB%84%E4%BB%B6%E9%97%B4%E9%97%B4%E9%9A%94%E4%B8%80%E6%AE%B5%E8%B7%9D%E7%A6%BB/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306124.png" alt="image-20230210230040875"></p>
+<p>紧贴着，不太好看，也可能不符合要求</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306380.png" alt="image-20230210230143250"></p>
+<p>只需要将上面的组件或下面的组件使用标签 <code>&lt;p&gt;&lt;/p&gt;</code> 包住就可以了，<code>&lt;div&gt;</code> 还不行</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a-form</span> <span class="attr">layout</span>=<span class="string">&quot;inline&quot;</span> <span class="attr">:wrapperCol</span>=<span class="string">&quot;&#123;span: 40&#125;&quot;</span> <span class="attr">:model</span>=<span class="string">&quot;param&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-input</span> <span class="attr">v-model:value</span>=<span class="string">&quot;param.name&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;search ebook by name&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;handleQuery(&#123;page: 1, size: pagination.pageSize&#125;)&quot;</span>&gt;</span>查找<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;addEbook&quot;</span>&gt;</span>新增<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">a-form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Ant Design Vue</tag>
+        <tag>wiki项目</tag>
+        <tag>小技巧</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CMD代理加速</title>
     <url>/2023/02/08/CMD%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/</url>
     <content><![CDATA[<p>前段时间搭建这个博客的时候，在最后提交时，一直显示网络问题，最后搞了五六次才总算提交到 github 上了，于是，我就在网上看看有没有什么解决的办法，最后发现了这个可行的办法</p>
@@ -142,25 +161,6 @@
       </categories>
       <tags>
         <tag>小技巧</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Antdv让页面中的组件间隔一段距离</title>
-    <url>/2023/02/13/Antdv%E8%AE%A9%E7%BB%84%E4%BB%B6%E9%97%B4%E9%97%B4%E9%9A%94%E4%B8%80%E6%AE%B5%E8%B7%9D%E7%A6%BB/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306124.png" alt="image-20230210230040875"></p>
-<p>紧贴着，不太好看，也可能不符合要求</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306380.png" alt="image-20230210230143250"></p>
-<p>只需要将上面的组件或下面的组件使用标签 <code>&lt;p&gt;&lt;/p&gt;</code> 包住就可以了，<code>&lt;div&gt;</code> 还不行</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a-form</span> <span class="attr">layout</span>=<span class="string">&quot;inline&quot;</span> <span class="attr">:wrapperCol</span>=<span class="string">&quot;&#123;span: 40&#125;&quot;</span> <span class="attr">:model</span>=<span class="string">&quot;param&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-input</span> <span class="attr">v-model:value</span>=<span class="string">&quot;param.name&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;search ebook by name&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;handleQuery(&#123;page: 1, size: pagination.pageSize&#125;)&quot;</span>&gt;</span>查找<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;addEbook&quot;</span>&gt;</span>新增<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">a-form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>Ant Design Vue</tag>
-        <tag>小技巧</tag>
-        <tag>wiki项目</tag>
       </tags>
   </entry>
   <entry>
