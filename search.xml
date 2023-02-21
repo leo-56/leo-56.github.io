@@ -63,6 +63,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Antdv版本兼容问题</title>
+    <url>/2023/02/05/Antdv%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>又一个教训，前端开发一定要注意版本号的匹配，高版本不一定兼容低版本，这种 UI 组件也不能掉以轻心</p>
+<span id="more"></span>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>组件的版本要与文档的版本配套</strong></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657929.png" alt="image-20230205133928955"></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657801.png" alt="image-20230205134047973"></p>
+<h3 id="踩坑经过"><a href="#踩坑经过" class="headerlink" title="踩坑经过"></a>踩坑经过</h3><p>今天在 Vue3 中引入 Ant Design Vue 后，跟着视频教程走，下一步就是布局</p>
+<p>在官网复制以下 css </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">31px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">24px</span> <span class="number">16px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ant-row-rtl</span> <span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">0</span> <span class="number">16px</span> <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-layout-background</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>.log</code> 选择器始终处于灰色，IDEA 也提示该选择器处于没有生效的状态，自然，它所涉及的 css 也没有生效</p>
+<p>后面才知道是 <strong>Ant Design Vue 版本</strong>的问题</p>
+<p>我当时选择的是 <code>2.0.0-rc.3</code>，可是官网上的 <code>2.X</code> 版本的文档指定了是 <code>2.2.8</code>，当时是看到了，本来以为没什么，谁想到在第一步就出现了问题</p>
+<p>后面换成了 <code>2.2.8</code> 之后，尽管还是处于灰色的状态，但是页面已经恢复正常了</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Ant Design Vue</tag>
+        <tag>问题解决</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Antdv表格布局中的小误区</title>
     <url>/2023/02/10/Antdv%E8%A1%A8%E6%A0%BC%E5%B8%83%E5%B1%80%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%AF%AF%E5%8C%BA/</url>
     <content><![CDATA[<p>在表格布局中的 layout 前面加了个冒号 <code>:</code>，搞得我弄了半天</p>
@@ -135,32 +161,6 @@
       </categories>
       <tags>
         <tag>小技巧</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Antdv版本兼容问题</title>
-    <url>/2023/02/05/Antdv%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>又一个教训，前端开发一定要注意版本号的匹配，高版本不一定兼容低版本，这种 UI 组件也不能掉以轻心</p>
-<span id="more"></span>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>组件的版本要与文档的版本配套</strong></p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657929.png" alt="image-20230205133928955"></p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657801.png" alt="image-20230205134047973"></p>
-<h3 id="踩坑经过"><a href="#踩坑经过" class="headerlink" title="踩坑经过"></a>踩坑经过</h3><p>今天在 Vue3 中引入 Ant Design Vue 后，跟着视频教程走，下一步就是布局</p>
-<p>在官网复制以下 css </p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">31px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">24px</span> <span class="number">16px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ant-row-rtl</span> <span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">0</span> <span class="number">16px</span> <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-layout-background</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>.log</code> 选择器始终处于灰色，IDEA 也提示该选择器处于没有生效的状态，自然，它所涉及的 css 也没有生效</p>
-<p>后面才知道是 <strong>Ant Design Vue 版本</strong>的问题</p>
-<p>我当时选择的是 <code>2.0.0-rc.3</code>，可是官网上的 <code>2.X</code> 版本的文档指定了是 <code>2.2.8</code>，当时是看到了，本来以为没什么，谁想到在第一步就出现了问题</p>
-<p>后面换成了 <code>2.2.8</code> 之后，尽管还是处于灰色的状态，但是页面已经恢复正常了</p>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>Ant Design Vue</tag>
-        <tag>问题解决</tag>
       </tags>
   </entry>
   <entry>
