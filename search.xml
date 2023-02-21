@@ -63,32 +63,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Antdv版本兼容问题</title>
-    <url>/2023/02/05/Antdv%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>又一个教训，前端开发一定要注意版本号的匹配，高版本不一定兼容低版本，这种 UI 组件也不能掉以轻心</p>
-<span id="more"></span>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>组件的版本要与文档的版本配套</strong></p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657929.png" alt="image-20230205133928955"></p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657801.png" alt="image-20230205134047973"></p>
-<h3 id="踩坑经过"><a href="#踩坑经过" class="headerlink" title="踩坑经过"></a>踩坑经过</h3><p>今天在 Vue3 中引入 Ant Design Vue 后，跟着视频教程走，下一步就是布局</p>
-<p>在官网复制以下 css </p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">31px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">24px</span> <span class="number">16px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ant-row-rtl</span> <span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">0</span> <span class="number">16px</span> <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-layout-background</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>.log</code> 选择器始终处于灰色，IDEA 也提示该选择器处于没有生效的状态，自然，它所涉及的 css 也没有生效</p>
-<p>后面才知道是 <strong>Ant Design Vue 版本</strong>的问题</p>
-<p>我当时选择的是 <code>2.0.0-rc.3</code>，可是官网上的 <code>2.X</code> 版本的文档指定了是 <code>2.2.8</code>，当时是看到了，本来以为没什么，谁想到在第一步就出现了问题</p>
-<p>后面换成了 <code>2.2.8</code> 之后，尽管还是处于灰色的状态，但是页面已经恢复正常了</p>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>Ant Design Vue</tag>
-        <tag>问题解决</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Antdv表格布局中的小误区</title>
     <url>/2023/02/10/Antdv%E8%A1%A8%E6%A0%BC%E5%B8%83%E5%B1%80%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%AF%AF%E5%8C%BA/</url>
     <content><![CDATA[<p>在表格布局中的 layout 前面加了个冒号 <code>:</code>，搞得我弄了半天</p>
@@ -164,6 +138,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Antdv版本兼容问题</title>
+    <url>/2023/02/05/Antdv%E7%89%88%E6%9C%AC%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>又一个教训，前端开发一定要注意版本号的匹配，高版本不一定兼容低版本，这种 UI 组件也不能掉以轻心</p>
+<span id="more"></span>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>组件的版本要与文档的版本配套</strong></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657929.png" alt="image-20230205133928955"></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302051657801.png" alt="image-20230205134047973"></p>
+<h3 id="踩坑经过"><a href="#踩坑经过" class="headerlink" title="踩坑经过"></a>踩坑经过</h3><p>今天在 Vue3 中引入 Ant Design Vue 后，跟着视频教程走，下一步就是布局</p>
+<p>在官网复制以下 css </p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">120px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">31px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">24px</span> <span class="number">16px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.ant-row-rtl</span> <span class="selector-id">#components-layout-demo-top-side</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: right;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">16px</span> <span class="number">0</span> <span class="number">16px</span> <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.site-layout-background</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>.log</code> 选择器始终处于灰色，IDEA 也提示该选择器处于没有生效的状态，自然，它所涉及的 css 也没有生效</p>
+<p>后面才知道是 <strong>Ant Design Vue 版本</strong>的问题</p>
+<p>我当时选择的是 <code>2.0.0-rc.3</code>，可是官网上的 <code>2.X</code> 版本的文档指定了是 <code>2.2.8</code>，当时是看到了，本来以为没什么，谁想到在第一步就出现了问题</p>
+<p>后面换成了 <code>2.2.8</code> 之后，尽管还是处于灰色的状态，但是页面已经恢复正常了</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Ant Design Vue</tag>
+        <tag>问题解决</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git不能正确显示中文文件名</title>
     <url>/2023/02/09/Git%E4%B8%8D%E8%83%BD%E6%AD%A3%E7%A1%AE%E6%98%BE%E7%A4%BA%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D/</url>
     <content><![CDATA[<p>git bash 无法正确显示中文文件名</p>
@@ -233,6 +233,123 @@
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JVM组成部分及简单介绍</title>
+    <url>/2023/02/21/JVM%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86%E5%8F%8A%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<p>JVM101 第一篇</p>
+<span id="more"></span>
+
+<h3 id="JVM组成部分"><a href="#JVM组成部分" class="headerlink" title="JVM组成部分"></a>JVM组成部分</h3><p>JVM 由三部分组成：</p>
+<ul>
+<li>类加载子系统</li>
+<li>运行时数据区域</li>
+<li>执行引擎</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302212316216.png" alt="1U4AcVNtejtT1Fa3oMozm5w"></p>
+<h3 id="类加载子系统"><a href="#类加载子系统" class="headerlink" title="类加载子系统"></a>类加载子系统</h3><p>Class 文件只有在必须使用的时候才会被装载，Class 文件或其他二进制流只有被 Java 虚拟机装载后才能在程序中使用</p>
+<p>装载过程分为三大阶段：</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302212316294.png" alt="image-20230221164907551"></p>
+<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><blockquote>
+<p>🙋‍♂️ JVM 在加载阶段完成的任务？</p>
+</blockquote>
+<ul>
+<li>获取类的二进制流</li>
+<li>将该二进制流解析为方法区内的数据结构</li>
+<li>创建 <code>java.lang.Class</code> 类的实例，表示该类型（实现反射的关键数据）</li>
+</ul>
+<h5 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h5><p>类加载器主要工作在 Class 装载的加载阶段，它的主要作用是从系统外部获得 Class 二进制数据流</p>
+<p><strong>ClassLoader 的分类</strong></p>
+<ul>
+<li>BootStrap ClassLoader（启动类加载器）</li>
+<li>Extension ClassLoader（扩展类加载器）</li>
+<li>Application ClassLoader（应用程序类加载器）</li>
+<li>User ClassLoader（自定义类加载器）</li>
+</ul>
+<p><strong>双亲委派模型</strong></p>
+<pre class="mermaid">flowchart BT
+    A(自定义类加载器) --> B(应用程序类加载器)
+    C(自定义类加载器) --> B
+    B --> D(扩展类加载器)
+    D --> E(启动类加载器)</pre>
+
+<p><strong>双亲委派模型的工作过程</strong></p>
+<p>系统中的 ClassLoader 在协同工作时，默认会使用双亲委派模式</p>
+<p>在类加载的时候，系统会判断当前类是否已经被加载，如果已经被加载，就会直接返回可用的类，否则就会尝试加载。在尝试加载时，会先请求双亲处理，如果请求失败，则会自己加载</p>
+<p><strong>双亲委派模型的优缺点</strong></p>
+<p>优点：Java 中的类随着它的类加载器一起具备了一种带有优先级的层次关系</p>
+<p>缺点：因为双亲委派模型中检查类是否已经加载的委托过程时单向的（自底向上），这会导致上层的 ClassLoader 无法访问下层的 ClassLoader 所加载的类</p>
+<p><strong>突破双亲模式</strong></p>
+<p>双亲模式的类加载方式是虚拟机默认的行为，但并非必须这么做，通过重载 ClassLoader 可以修改该行为</p>
+<h4 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h4><ul>
+<li>验证类：保证加载的字节码是合法、合理并符合规范的</li>
+<li>准备：在这个阶段，虚拟机会为这个类分配响应的内存空间，并设置初始值</li>
+<li>解析类：解析阶段的工作就是将类、接口、字段和方法的符号引用转为直接引用</li>
+</ul>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>初始化阶段的重要工作是执行类的初始化方法 <code>&lt;clinit&gt;</code></p>
+<p>该方法是由编译器自动生成的，它是由类静态成员的赋值语句及 static 语句块共同产生的</p>
+<h3 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h3><ul>
+<li>方法区</li>
+<li>堆</li>
+<li>虚拟机栈</li>
+<li>PC 寄存器</li>
+<li>本地方法栈</li>
+</ul>
+<h4 id="虚拟机线程共享的区域"><a href="#虚拟机线程共享的区域" class="headerlink" title="虚拟机线程共享的区域"></a>虚拟机线程共享的区域</h4><h5 id="第一块：方法区"><a href="#第一块：方法区" class="headerlink" title="第一块：方法区"></a>第一块：方法区</h5><p>方法区的作用是保存系统的类信息，比如类的字段、方法、常量池等。方法区的大小决定了系统可以保存多少个类</p>
+<p>在 JDK1.8 之前，方法区可以理解为永生区。我们可以使用下列参数来对永生区的大小进行指定</p>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">-XX:PermSize</span><br><span class="line">-XX:MaxPermSize</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>😀 默认情况下，<code>-XX:MaxPermSize</code> 的大小为 64M，即方法区的数据超过了这个容量的话，就会导致方法区溢出，虚拟机会抛出内存溢出错误</p>
+</blockquote>
+<p>在 JDK1.8 之后（包括 1.8），永生区被彻底移除，取而代之的是元数据区。元数据区的大小可以使用下列参数指定</p>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">-XX:MaxMetaspaceSize</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>😀 元数据区是一块堆外的直接内存，与之前的永生区不同，如果不指定大小，默认情况下，虚拟机会耗尽所有的可用系统内存</p>
+</blockquote>
+<h5 id="第二块：堆"><a href="#第二块：堆" class="headerlink" title="第二块：堆"></a>第二块：堆</h5><p>Java 应用程序几乎所有的对象都存放在堆中，并且 Java 堆空间是完全自动化管理的，通过垃圾回收机制，垃圾对象会被自动清理</p>
+<h4 id="虚拟机线程独有的区域"><a href="#虚拟机线程独有的区域" class="headerlink" title="虚拟机线程独有的区域"></a>虚拟机线程独有的区域</h4><h5 id="第一块：PC-寄存器"><a href="#第一块：PC-寄存器" class="headerlink" title="第一块：PC 寄存器"></a>第一块：PC 寄存器</h5><p>是一块较小的内存空间，可以看作是当前线程所执行的字节码的<strong>行号指示器</strong></p>
+<blockquote>
+<p>😀 执行引擎中的字节码解释器工作时就是通过改变这个计数器的值来选取吓一跳需要执行的字节码指令</p>
+</blockquote>
+<h5 id="第二块：虚拟机栈"><a href="#第二块：虚拟机栈" class="headerlink" title="第二块：虚拟机栈"></a>第二块：虚拟机栈</h5><p>虚拟机栈描述的是 Java 方法执行的线程内存模型</p>
+<p>Java 中的方法被执行时，虚拟机都会同步创建一个栈帧用于存储局部变量表、操作数栈、动态连接、方法出口等信息。每一个方法被调用到执行完毕的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程</p>
+<blockquote>
+<p>😀 虚拟机栈中存放着栈帧，而每当方法执行时就会有一个对应的栈帧入栈，方法执行完毕时，该栈帧就会从虚拟机栈中出栈</p>
+<p>​      栈帧中存放的数据与当前所执行的方法相关</p>
+</blockquote>
+<p>栈帧中的<strong>局部变量表</strong>以局部变量槽为单位存放了编译期可知的各种 Java 虚拟机基本数据类型及对象引用类型</p>
+<p>栈帧中的<strong>操作数栈</strong>主要用于保存计算过程的中间结果，同时作为计算过程中变量临时的存储空间。许多 Java 字节码指令都需要通过操作数栈进行参数传递</p>
+<h5 id="第三块：本地方法栈"><a href="#第三块：本地方法栈" class="headerlink" title="第三块：本地方法栈"></a>第三块：本地方法栈</h5><p>该区域的作用是为虚拟机使用到的本地方法服务</p>
+<blockquote>
+<p>😀 HotSpot 虚拟机直接将本地方法栈与虚拟机栈合二为一</p>
+</blockquote>
+<h3 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a>执行引擎</h3><h4 id="JIT-即时编译器"><a href="#JIT-即时编译器" class="headerlink" title="JIT 即时编译器"></a>JIT 即时编译器</h4><p>当探测到热点代码时，为了提高执行效率，编译器就会将这些代码编译成本地机器码</p>
+<h4 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h4><p>Java 字节码对于虚拟机，就好像汇编语言对于计算机，属于基本执行指令</p>
+<p>解释器解释执行的是字节码指令</p>
+<blockquote>
+<p>🙋‍♂️ Java 程序使用解释器执行还是编译器执行？</p>
+</blockquote>
+<p>在 HotSpot 中，Java 程序最初都是通过解释器进行解释执行的，当虚拟机发现某个方法或代码块的运行特别频繁，就会把这些代码认定为热点代码，为了提高热点代码的执行效率，在运行时，虚拟机将会把这些代码编译成本地机器码</p>
+<blockquote>
+<p>🙋‍♂️ 为什么既有解释器，又有编译器？</p>
+</blockquote>
+<p>当程序需要迅速启动和执行的时候，解释器可以首先发挥作用，省去编译的时间，立即执行</p>
+<p>当程序启动后，随着时间的推移，编译器组件发挥作用，把越来越多的代码编译成本地代码，这样可以减少解释器的中间损耗，获得更高的执行效率</p>
+<h4 id="GC-垃圾回收器"><a href="#GC-垃圾回收器" class="headerlink" title="GC 垃圾回收器"></a>GC 垃圾回收器</h4><p>垃圾回收器可以对内存空间进行自动化地管理</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>《深入理解 Java 虚拟机：JVM 高级特性与最佳实践》</li>
+<li>《实战 Java 虚拟机：JVM 故障诊断与性能优化》</li>
+<li><a href="https://medium.com/javarevisited/jvm-101-introduction-classloader-sub-system-jit-compiler-part-1-9e5a6782fa3e">JVM 101: Introduction, ClassLoader Sub-System &amp; JIT compiler (Part 1) | by Savindi Wijenayaka | Javarevisited | Medium</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>JVM</tag>
       </tags>
   </entry>
   <entry>
