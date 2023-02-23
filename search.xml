@@ -19,6 +19,21 @@
       </categories>
   </entry>
   <entry>
+    <title>Git去除第一条提交</title>
+    <url>/2023/02/11/Git/Git%E5%88%A0%E9%99%A4%E7%AC%AC%E4%B8%80%E6%9D%A1%E6%8F%90%E4%BA%A4/</url>
+    <content><![CDATA[<p>一般修改上一条提交可以使用：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git rebase -i HEAD~</span><br></pre></td></tr></table></figure>
+
+<p>但是，当我们的仓库只有一条提交时，此时，修改提交却不能使用上述命令</p>
+<p>使用下面的命令即可去掉第一个提交</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git update-ref -d HEAD</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Hexo文章阴影添加</title>
     <url>/2023/02/09/Hexo/Hexo%E6%96%87%E7%AB%A0%E9%98%B4%E5%BD%B1%E6%B7%BB%E5%8A%A0/</url>
     <content><![CDATA[<p>在 hexo 博客中使用了 next 主题，可以使用这篇博文中的方法来给博客中的文章边框加上阴影</p>
@@ -49,57 +64,107 @@
       </categories>
   </entry>
   <entry>
-    <title>Git去除第一条提交</title>
-    <url>/2023/02/11/Git/Git%E5%88%A0%E9%99%A4%E7%AC%AC%E4%B8%80%E6%9D%A1%E6%8F%90%E4%BA%A4/</url>
-    <content><![CDATA[<p>一般修改上一条提交可以使用：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git rebase -i HEAD~</span><br></pre></td></tr></table></figure>
+    <title>GC垃圾收集器</title>
+    <url>/2023/02/22/JVM/GC%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/</url>
+    <content><![CDATA[<p>JVM 101 第二篇</p>
+<span id="more"></span>
 
-<p>但是，当我们的仓库只有一条提交时，此时，修改提交却不能使用上述命令</p>
-<p>使用下面的命令即可去掉第一个提交</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git update-ref -d HEAD</span><br></pre></td></tr></table></figure>
+<h3 id="1-对象存活的判断"><a href="#1-对象存活的判断" class="headerlink" title="1 对象存活的判断"></a>1 对象存活的判断</h3><p>在 JVM 中，判断对象是否存活的大体思路是判断对象是否被其他对象所引用</p>
+<p>当前主流的商用程序语言都是通过<strong>可达性分析算法</strong>来判断对象是否存活</p>
+<h4 id="1-1-可达性分析算法"><a href="#1-1-可达性分析算法" class="headerlink" title="1.1 可达性分析算法"></a>1.1 可达性分析算法</h4><p>基本思路是通过一系列被称为 GC Root 的根对象作为起始节点集，从这些节点开始，根据引用关系向下搜索，搜索过程所走过的路径称为引用链，如果某个对象到 GC Root 间没有任何引用链相连，则表明该对象不可达，该对象没有被使用</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302221350273.webp" alt="img"></p>
+<blockquote>
+<p>Object 5 及其引用对象为不可达对象</p>
+</blockquote>
+<h4 id="1-2-引用的强弱"><a href="#1-2-引用的强弱" class="headerlink" title="1.2 引用的强弱"></a>1.2 引用的强弱</h4><p>在可达性分析算法中，对象可达，表明对象被其他对象引用</p>
+<p>引用表述的是对象与对象间的关系，这种关系根据强弱可划分为四个类别</p>
+<h5 id="1-2-1-强引用"><a href="#1-2-1-强引用" class="headerlink" title="1.2.1 强引用"></a>1.2.1 强引用</h5><p>最普遍的一种引用，我们缩写代码中对象的引用一般都是这种引用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br></pre></td></tr></table></figure>
 
+<p>这种引用关系如果一直存在，那么被引用的对象就一直<strong>不会被 GC 回收</strong></p>
+<h5 id="1-2-2-软引用"><a href="#1-2-2-软引用" class="headerlink" title="1.2.2 软引用"></a>1.2.2 软引用</h5><p>将对象用 SoftReference 包裹一下，当我们需要从软引用对象中获取包裹对象时，要调用 get 方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SoftReference&lt;Student&gt; studentSoftReference = <span class="keyword">new</span> <span class="title class_">SoftReference</span>&lt;Student&gt;(<span class="keyword">new</span> <span class="title class_">Student</span>());</span><br><span class="line"><span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> studentSoftReference.get();</span><br><span class="line">System.out.println(student);</span><br></pre></td></tr></table></figure>
+
+<p>当<strong>内存不足</strong>时，即使是软引用，也会被 GC 回收</p>
+<h5 id="1-2-3-弱引用"><a href="#1-2-3-弱引用" class="headerlink" title="1.2.3 弱引用"></a>1.2.3 弱引用</h5><p>弱引用和软引用的使用方法类似</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">WeakReference&lt;<span class="type">byte</span>[]&gt; weakReference = <span class="keyword">new</span> <span class="title class_">WeakReference</span>&lt;<span class="type">byte</span>[]&gt;(<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">10</span>]);</span><br><span class="line">System.out.println(weakReference.get());</span><br></pre></td></tr></table></figure>
+
+<p>只要<strong>触发 GC</strong>，弱引用就会被 GC 回收</p>
+<blockquote>
+<p>ThreadLocal、WeakHashMap 都使用到了弱引用</p>
+</blockquote>
+<h5 id="1-2-4-虚引用"><a href="#1-2-4-虚引用" class="headerlink" title="1.2.4 虚引用"></a>1.2.4 虚引用</h5><p>虚引用是<strong>最弱的一种引用关系</strong>，为一个对象设置虚引用关联的唯一目的只是为了能在这个对象被收集器回收时收到一个系统通知</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ReferenceQueue</span> <span class="variable">queue</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReferenceQueue</span>();</span><br><span class="line">PhantomReference&lt;<span class="type">byte</span>[]&gt; reference = <span class="keyword">new</span> <span class="title class_">PhantomReference</span>&lt;<span class="type">byte</span>[]&gt;(<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1</span>], queue);</span><br></pre></td></tr></table></figure>
+
+<p>虚引用在使用时要传入一个 ReferenceQueue 类型的队列，但是却不能通过 get 方法获取到存入的对象</p>
+<p>当 GC 时，发现该对象被引用，此对象是一个虚引用，就会在回收之前，把这个虚引用加入到与之关联的 ReferenceQueue 对象之中</p>
+<h3 id="2-垃圾收集算法"><a href="#2-垃圾收集算法" class="headerlink" title="2 垃圾收集算法"></a>2 垃圾收集算法</h3><h4 id="2-1-标记-清除算法"><a href="#2-1-标记-清除算法" class="headerlink" title="2.1 标记-清除算法"></a>2.1 标记-清除算法</h4><h5 id="2-1-1-工作过程"><a href="#2-1-1-工作过程" class="headerlink" title="2.1.1 工作过程"></a>2.1.1 工作过程</h5><ol>
+<li>标记：标记出所有需要回收的对象</li>
+<li>清除：统一回收掉所有被标记的对象</li>
+</ol>
+<h5 id="2-1-2-缺点"><a href="#2-1-2-缺点" class="headerlink" title="2.1.2 缺点"></a>2.1.2 缺点</h5><ul>
+<li>执行效率不稳定。如果堆中包含大量对象，而其中大部分是需要被回收的，这时就必须进行大量标记和清除的动作</li>
+<li>内存空间的碎片化问题。标记、清除后会产生大量不连续的内存碎片，空间碎片太多可能会导致今后需要分配较大对象时无法找到足够的连续内存而再次触发垃圾收集动作</li>
+</ul>
+<h4 id="2-2-标记-复制算法"><a href="#2-2-标记-复制算法" class="headerlink" title="2.2 标记-复制算法"></a>2.2 标记-复制算法</h4><p>标记-复制算法是一种适用于新生代垃圾收集的算法。它解决标记-清除算法执行效率不稳定这一问题</p>
+<h5 id="2-2-1-工作过程"><a href="#2-2-1-工作过程" class="headerlink" title="2.2.1 工作过程"></a>2.2.1 工作过程</h5><p>改良后的标记-复制算法将新生代划分为一块较大的 Eden 空间和两块较小的 Survivor 空间（from 和 to 区）。每次分配内存只是用 Eden 区和其中的一块 Survivor 区 (from 区)，发生垃圾收集动作时，将 Eden 和 Survivor (from 区) 中仍然存活的对象一次性复制到另外一块 Survivor 空间 (to 区) 上，然后直接清除掉 Eden 区和已用过的那块 Survivor 区 (from 区)，之后 to 区与 from 区调换位置</p>
+<blockquote>
+<p>下一次垃圾回收清除的 Survivor 空间就是上一次存放存活对象的空间</p>
+<p>Eden : Survivor = 8 : 1，新生代可存放对象的内存空间占总空间的 90%</p>
+</blockquote>
+<h5 id="2-2-2-缺点"><a href="#2-2-2-缺点" class="headerlink" title="2.2.2 缺点"></a>2.2.2 缺点</h5><p>标记-复制算法在对象存活率较高时就要进行较多的复制操作，此时效率将会降低。这种算法只适用于新生代这种对象朝生夕灭的堆空间</p>
+<h4 id="2-3-标记-整理算法"><a href="#2-3-标记-整理算法" class="headerlink" title="2.3 标记-整理算法"></a>2.3 标记-整理算法</h4><p>标记-整理算法基于标记-清除算法，解决了后者垃圾收集之后的内存空间的碎片化问题</p>
+<h5 id="2-3-1-工作过程"><a href="#2-3-1-工作过程" class="headerlink" title="2.3.1 工作过程"></a>2.3.1 工作过程</h5><p>首先进行标记，之后将所有的存活对象压缩到内存的一端，然后清理边界外所有的空间</p>
+<h5 id="2-3-2-缺点"><a href="#2-3-2-缺点" class="headerlink" title="2.3.2 缺点"></a>2.3.2 缺点</h5><p>移动存活对象并更新所有引用这些对象的地方将会是一种极为负重的操作，而且这种对象移动操作必须全程暂停用户应用程序才能进行，从而导致较长的停顿现象，这被称之为 <strong>Stop The World</strong></p>
+<blockquote>
+<p><del>采用标记-整理算法这种思想的垃圾收集器才会出现 Stop The World 现象</del></p>
+</blockquote>
+<h3 id="3-常见的垃圾收集器"><a href="#3-常见的垃圾收集器" class="headerlink" title="3 常见的垃圾收集器"></a>3 常见的垃圾收集器</h3><p>总体上可以将垃圾收集器分为四类：</p>
+<ul>
+<li>串行垃圾回收器</li>
+<li>并行垃圾回收器</li>
+<li>CMS</li>
+<li>G1</li>
+</ul>
+<blockquote>
+<p>响应时间优先的服务端程序：ParNew + CMS</p>
+</blockquote>
+<p>本文主要论述生产环境中常用的 ParNew 和 CMS 两种垃圾收集器</p>
+<h4 id="3-1-ParNew"><a href="#3-1-ParNew" class="headerlink" title="3.1 ParNew"></a>3.1 ParNew</h4><p>属于并行垃圾收集器，协助 CMS 作为<strong>新生代</strong>的垃圾回收器</p>
+<h4 id="3-2-CMS"><a href="#3-2-CMS" class="headerlink" title="3.2 CMS"></a>3.2 CMS</h4><p>CMS 是一种采用标记-清除算法，工作在<strong>老年代</strong>中，以获取最短回收停顿时间为目标的收集器</p>
+<h5 id="3-2-1-工作流程"><a href="#3-2-1-工作流程" class="headerlink" title="3.2.1 工作流程"></a>3.2.1 工作流程</h5><p>大致分为四个步骤：</p>
+<ol>
+<li>初始标记。标记 GC Roots 能直接关联到的对象，速度很快</li>
+<li>并发标记。从 GC Roots 的直接关联对象开始遍历整个对象图的过程，这个过程与用户线程一起并发运行</li>
+<li>重新标记。修正并发标记期间，变动的对象标记记录</li>
+<li>并发清除。清理删除掉标记阶段判断的已经死亡的对象</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302221351969.webp" alt="img"></p>
+<h5 id="3-2-3-缺点"><a href="#3-2-3-缺点" class="headerlink" title="3.2.3 缺点"></a>3.2.3 缺点</h5><ul>
+<li>对处理器资源非常敏感</li>
+<li>无法处理并发标记和并发清理阶段产生的浮动垃圾</li>
+<li>收集结束时会有大量的空间碎片产生</li>
+</ul>
+<h3 id="4-疑问"><a href="#4-疑问" class="headerlink" title="4 疑问"></a>4 疑问</h3><h4 id="4-1-哪些情况会出现-Stop-The-World"><a href="#4-1-哪些情况会出现-Stop-The-World" class="headerlink" title="4.1 哪些情况会出现 Stop The World?"></a>4.1 哪些情况会出现 Stop The World?</h4><ul>
+<li>对象标记</li>
+<li>对象移动</li>
+</ul>
+<h4 id="4-2-在-CMS-中，重新标记难道没有标记并发标记阶段用户线程产生的垃圾对象吗？"><a href="#4-2-在-CMS-中，重新标记难道没有标记并发标记阶段用户线程产生的垃圾对象吗？" class="headerlink" title="4.2 在 CMS 中，重新标记难道没有标记并发标记阶段用户线程产生的垃圾对象吗？"></a>4.2 在 CMS 中，重新标记难道没有标记并发标记阶段用户线程产生的垃圾对象吗？</h4><p>[TODO]对应 CMS 的缺点第二点</p>
+<h4 id="4-3-CMS-为何要进行多次标记？"><a href="#4-3-CMS-为何要进行多次标记？" class="headerlink" title="4.3 CMS 为何要进行多次标记？"></a>4.3 CMS 为何要进行多次标记？</h4><p>因为如果所有可达对象要是一次性标记的话，那么 Stop The World 的时间是无法容忍的</p>
+<h4 id="4-4-在三次标记中，为何只有初始标记和重新标记会出现-Stop-The-World-现象？"><a href="#4-4-在三次标记中，为何只有初始标记和重新标记会出现-Stop-The-World-现象？" class="headerlink" title="4.4 在三次标记中，为何只有初始标记和重新标记会出现 Stop The World 现象？"></a>4.4 在三次标记中，为何只有初始标记和重新标记会出现 Stop The World 现象？</h4><p>可达性分析算法理论上要求全过程都基于<strong>一个</strong>能保障一致性的快照中才能够进行分析，所以一般的对象标记都是会出现 Stop The World 现象的</p>
+<p>CMS 为最大程度减少 Stop The World 的时间，采用了并发的可达性分析技术。它的并发标记阶段时间较长，因此采用了当前时刻的快照来遍历整个对象图，所以就没有暂停用户线程，也就没有出现 STW</p>
+<h3 id="5-参考"><a href="#5-参考" class="headerlink" title="5 参考"></a>5 参考</h3><ul>
+<li><a href="https://juejin.cn/post/6926365727700189198">深入理解JAVA垃圾收集器CMS,G1工作流程原理 - 掘金</a></li>
+<li><a href="https://heapdump.cn/article/1995860">谈谈JVM的垃圾回收器 | HeapDump性能社区</a></li>
+<li>《深入理解 Java 虚拟机：JVM 高级特性与最佳实践》</li>
+<li>《实战 Java 虚拟机：JVM 故障诊断与性能优化》</li>
+</ul>
 ]]></content>
       <categories>
-        <category>Git</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Vim编辑器操作</title>
-    <url>/2023/02/09/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<p>在 vim 编辑器中搜索关键词 “keyword”</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/keyword</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在搜索的结果中跳到下一个：<code>N</code></li>
-<li>在搜索的结果中跳到前一个：<code>n</code></li>
-</ul>
-<p>在 vim 编辑器中</p>
-<ul>
-<li><p>显示行号：<code>:set nu</code></p>
-</li>
-<li><p>跳到行号为 n 的行：<code>nG</code></p>
-</li>
-<li><p>跳到文件的底部：<code>G</code></p>
-</li>
-<li><p>跳到文件的头部：<code>g</code></p>
-</li>
-<li><p>删除当前行在内的往下 n 行：<code>ndd</code></p>
-</li>
-<li><p>复制从光标开始往右的 n 个单词：<code>nyw</code></p>
-</li>
-<li><p>将包括当前行在内的往下 n 行复制到缓冲区中：<code>nyy</code></p>
-</li>
-<li><p>撤销上一步操作：<code>u</code></p>
-</li>
-<li><p>粘贴缓冲区（剪切板）里的内容到光标后：<code>p</code></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Linux</category>
+        <category>JVM</category>
       </categories>
       <tags>
-        <tag>Vim</tag>
+        <tag>TODO</tag>
       </tags>
   </entry>
   <entry>
@@ -217,136 +282,42 @@
       </categories>
   </entry>
   <entry>
-    <title>GC垃圾收集器</title>
-    <url>/2023/02/22/JVM/GC%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/</url>
-    <content><![CDATA[<p>JVM 101 第二篇</p>
-<span id="more"></span>
+    <title>Vim编辑器操作</title>
+    <url>/2023/02/09/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<p>在 vim 编辑器中搜索关键词 “keyword”</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/keyword</span><br></pre></td></tr></table></figure>
 
-<h3 id="1-对象存活的判断"><a href="#1-对象存活的判断" class="headerlink" title="1 对象存活的判断"></a>1 对象存活的判断</h3><p>在 JVM 中，判断对象是否存活的大体思路是判断对象是否被其他对象所引用</p>
-<p>当前主流的商用程序语言都是通过<strong>可达性分析算法</strong>来判断对象是否存活</p>
-<h4 id="1-1-可达性分析算法"><a href="#1-1-可达性分析算法" class="headerlink" title="1.1 可达性分析算法"></a>1.1 可达性分析算法</h4><p>基本思路是通过一系列被称为 GC Root 的根对象作为起始节点集，从这些节点开始，根据引用关系向下搜索，搜索过程所走过的路径称为引用链，如果某个对象到 GC Root 间没有任何引用链相连，则表明该对象不可达，该对象没有被使用</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302221350273.webp" alt="img"></p>
-<blockquote>
-<p>Object 5 及其引用对象为不可达对象</p>
-</blockquote>
-<h4 id="1-2-引用的强弱"><a href="#1-2-引用的强弱" class="headerlink" title="1.2 引用的强弱"></a>1.2 引用的强弱</h4><p>在可达性分析算法中，对象可达，表明对象被其他对象引用</p>
-<p>引用表述的是对象与对象间的关系，这种关系根据强弱可划分为四个类别</p>
-<h5 id="1-2-1-强引用"><a href="#1-2-1-强引用" class="headerlink" title="1.2.1 强引用"></a>1.2.1 强引用</h5><p>最普遍的一种引用，我们缩写代码中对象的引用一般都是这种引用</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br></pre></td></tr></table></figure>
-
-<p>这种引用关系如果一直存在，那么被引用的对象就一直<strong>不会被 GC 回收</strong></p>
-<h5 id="1-2-2-软引用"><a href="#1-2-2-软引用" class="headerlink" title="1.2.2 软引用"></a>1.2.2 软引用</h5><p>将对象用 SoftReference 包裹一下，当我们需要从软引用对象中获取包裹对象时，要调用 get 方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">SoftReference&lt;Student&gt; studentSoftReference = <span class="keyword">new</span> <span class="title class_">SoftReference</span>&lt;Student&gt;(<span class="keyword">new</span> <span class="title class_">Student</span>());</span><br><span class="line"><span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> studentSoftReference.get();</span><br><span class="line">System.out.println(student);</span><br></pre></td></tr></table></figure>
-
-<p>当<strong>内存不足</strong>时，即使是软引用，也会被 GC 回收</p>
-<h5 id="1-2-3-弱引用"><a href="#1-2-3-弱引用" class="headerlink" title="1.2.3 弱引用"></a>1.2.3 弱引用</h5><p>弱引用和软引用的使用方法类似</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">WeakReference&lt;<span class="type">byte</span>[]&gt; weakReference = <span class="keyword">new</span> <span class="title class_">WeakReference</span>&lt;<span class="type">byte</span>[]&gt;(<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">10</span>]);</span><br><span class="line">System.out.println(weakReference.get());</span><br></pre></td></tr></table></figure>
-
-<p>只要<strong>触发 GC</strong>，弱引用就会被 GC 回收</p>
-<blockquote>
-<p>ThreadLocal、WeakHashMap 都使用到了弱引用</p>
-</blockquote>
-<h5 id="1-2-4-虚引用"><a href="#1-2-4-虚引用" class="headerlink" title="1.2.4 虚引用"></a>1.2.4 虚引用</h5><p>虚引用是<strong>最弱的一种引用关系</strong>，为一个对象设置虚引用关联的唯一目的只是为了能在这个对象被收集器回收时收到一个系统通知</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">ReferenceQueue</span> <span class="variable">queue</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReferenceQueue</span>();</span><br><span class="line">PhantomReference&lt;<span class="type">byte</span>[]&gt; reference = <span class="keyword">new</span> <span class="title class_">PhantomReference</span>&lt;<span class="type">byte</span>[]&gt;(<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1</span>], queue);</span><br></pre></td></tr></table></figure>
-
-<p>虚引用在使用时要传入一个 ReferenceQueue 类型的队列，但是却不能通过 get 方法获取到存入的对象</p>
-<p>当 GC 时，发现该对象被引用，此对象是一个虚引用，就会在回收之前，把这个虚引用加入到与之关联的 ReferenceQueue 对象之中</p>
-<h3 id="2-垃圾收集算法"><a href="#2-垃圾收集算法" class="headerlink" title="2 垃圾收集算法"></a>2 垃圾收集算法</h3><h4 id="2-1-标记-清除算法"><a href="#2-1-标记-清除算法" class="headerlink" title="2.1 标记-清除算法"></a>2.1 标记-清除算法</h4><h5 id="2-1-1-工作过程"><a href="#2-1-1-工作过程" class="headerlink" title="2.1.1 工作过程"></a>2.1.1 工作过程</h5><ol>
-<li>标记：标记出所有需要回收的对象</li>
-<li>清除：统一回收掉所有被标记的对象</li>
-</ol>
-<h5 id="2-1-2-缺点"><a href="#2-1-2-缺点" class="headerlink" title="2.1.2 缺点"></a>2.1.2 缺点</h5><ul>
-<li>执行效率不稳定。如果堆中包含大量对象，而其中大部分是需要被回收的，这时就必须进行大量标记和清除的动作</li>
-<li>内存空间的碎片化问题。标记、清除后会产生大量不连续的内存碎片，空间碎片太多可能会导致今后需要分配较大对象时无法找到足够的连续内存而再次触发垃圾收集动作</li>
-</ul>
-<h4 id="2-2-标记-复制算法"><a href="#2-2-标记-复制算法" class="headerlink" title="2.2 标记-复制算法"></a>2.2 标记-复制算法</h4><p>标记-复制算法是一种适用于新生代垃圾收集的算法。它解决标记-清除算法执行效率不稳定这一问题</p>
-<h5 id="2-2-1-工作过程"><a href="#2-2-1-工作过程" class="headerlink" title="2.2.1 工作过程"></a>2.2.1 工作过程</h5><p>改良后的标记-复制算法将新生代划分为一块较大的 Eden 空间和两块较小的 Survivor 空间（from 和 to 区）。每次分配内存只是用 Eden 区和其中的一块 Survivor 区 (from 区)，发生垃圾收集动作时，将 Eden 和 Survivor (from 区) 中仍然存活的对象一次性复制到另外一块 Survivor 空间 (to 区) 上，然后直接清除掉 Eden 区和已用过的那块 Survivor 区 (from 区)，之后 to 区与 from 区调换位置</p>
-<blockquote>
-<p>下一次垃圾回收清除的 Survivor 空间就是上一次存放存活对象的空间</p>
-<p>Eden : Survivor = 8 : 1，新生代可存放对象的内存空间占总空间的 90%</p>
-</blockquote>
-<h5 id="2-2-2-缺点"><a href="#2-2-2-缺点" class="headerlink" title="2.2.2 缺点"></a>2.2.2 缺点</h5><p>标记-复制算法在对象存活率较高时就要进行较多的复制操作，此时效率将会降低。这种算法只适用于新生代这种对象朝生夕灭的堆空间</p>
-<h4 id="2-3-标记-整理算法"><a href="#2-3-标记-整理算法" class="headerlink" title="2.3 标记-整理算法"></a>2.3 标记-整理算法</h4><p>标记-整理算法基于标记-清除算法，解决了后者垃圾收集之后的内存空间的碎片化问题</p>
-<h5 id="2-3-1-工作过程"><a href="#2-3-1-工作过程" class="headerlink" title="2.3.1 工作过程"></a>2.3.1 工作过程</h5><p>首先进行标记，之后将所有的存活对象压缩到内存的一端，然后清理边界外所有的空间</p>
-<h5 id="2-3-2-缺点"><a href="#2-3-2-缺点" class="headerlink" title="2.3.2 缺点"></a>2.3.2 缺点</h5><p>移动存活对象并更新所有引用这些对象的地方将会是一种极为负重的操作，而且这种对象移动操作必须全程暂停用户应用程序才能进行，从而导致较长的停顿现象，这被称之为 <strong>Stop The World</strong></p>
-<blockquote>
-<p><del>采用标记-整理算法这种思想的垃圾收集器才会出现 Stop The World 现象</del></p>
-</blockquote>
-<h3 id="3-常见的垃圾收集器"><a href="#3-常见的垃圾收集器" class="headerlink" title="3 常见的垃圾收集器"></a>3 常见的垃圾收集器</h3><p>总体上可以将垃圾收集器分为四类：</p>
 <ul>
-<li>串行垃圾回收器</li>
-<li>并行垃圾回收器</li>
-<li>CMS</li>
-<li>G1</li>
+<li>在搜索的结果中跳到下一个：<code>N</code></li>
+<li>在搜索的结果中跳到前一个：<code>n</code></li>
 </ul>
-<blockquote>
-<p>响应时间优先的服务端程序：ParNew + CMS</p>
-</blockquote>
-<p>本文主要论述生产环境中常用的 ParNew 和 CMS 两种垃圾收集器</p>
-<h4 id="3-1-ParNew"><a href="#3-1-ParNew" class="headerlink" title="3.1 ParNew"></a>3.1 ParNew</h4><p>属于并行垃圾收集器，协助 CMS 作为<strong>新生代</strong>的垃圾回收器</p>
-<h4 id="3-2-CMS"><a href="#3-2-CMS" class="headerlink" title="3.2 CMS"></a>3.2 CMS</h4><p>CMS 是一种采用标记-清除算法，工作在<strong>老年代</strong>中，以获取最短回收停顿时间为目标的收集器</p>
-<h5 id="3-2-1-工作流程"><a href="#3-2-1-工作流程" class="headerlink" title="3.2.1 工作流程"></a>3.2.1 工作流程</h5><p>大致分为四个步骤：</p>
-<ol>
-<li>初始标记。标记 GC Roots 能直接关联到的对象，速度很快</li>
-<li>并发标记。从 GC Roots 的直接关联对象开始遍历整个对象图的过程，这个过程与用户线程一起并发运行</li>
-<li>重新标记。修正并发标记期间，变动的对象标记记录</li>
-<li>并发清除。清理删除掉标记阶段判断的已经死亡的对象</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302221351969.webp" alt="img"></p>
-<h5 id="3-2-3-缺点"><a href="#3-2-3-缺点" class="headerlink" title="3.2.3 缺点"></a>3.2.3 缺点</h5><ul>
-<li>对处理器资源非常敏感</li>
-<li>无法处理并发标记和并发清理阶段产生的浮动垃圾</li>
-<li>收集结束时会有大量的空间碎片产生</li>
-</ul>
-<h3 id="4-疑问"><a href="#4-疑问" class="headerlink" title="4 疑问"></a>4 疑问</h3><h4 id="4-1-哪些情况会出现-Stop-The-World"><a href="#4-1-哪些情况会出现-Stop-The-World" class="headerlink" title="4.1 哪些情况会出现 Stop The World?"></a>4.1 哪些情况会出现 Stop The World?</h4><ul>
-<li>对象标记</li>
-<li>对象移动</li>
-</ul>
-<h4 id="4-2-在-CMS-中，重新标记难道没有标记并发标记阶段用户线程产生的垃圾对象吗？"><a href="#4-2-在-CMS-中，重新标记难道没有标记并发标记阶段用户线程产生的垃圾对象吗？" class="headerlink" title="4.2 在 CMS 中，重新标记难道没有标记并发标记阶段用户线程产生的垃圾对象吗？"></a>4.2 在 CMS 中，重新标记难道没有标记并发标记阶段用户线程产生的垃圾对象吗？</h4><p>[TODO]对应 CMS 的缺点第二点</p>
-<h4 id="4-3-CMS-为何要进行多次标记？"><a href="#4-3-CMS-为何要进行多次标记？" class="headerlink" title="4.3 CMS 为何要进行多次标记？"></a>4.3 CMS 为何要进行多次标记？</h4><p>因为如果所有可达对象要是一次性标记的话，那么 Stop The World 的时间是无法容忍的</p>
-<h4 id="4-4-在三次标记中，为何只有初始标记和重新标记会出现-Stop-The-World-现象？"><a href="#4-4-在三次标记中，为何只有初始标记和重新标记会出现-Stop-The-World-现象？" class="headerlink" title="4.4 在三次标记中，为何只有初始标记和重新标记会出现 Stop The World 现象？"></a>4.4 在三次标记中，为何只有初始标记和重新标记会出现 Stop The World 现象？</h4><p>可达性分析算法理论上要求全过程都基于<strong>一个</strong>能保障一致性的快照中才能够进行分析，所以一般的对象标记都是会出现 Stop The World 现象的</p>
-<p>CMS 为最大程度减少 Stop The World 的时间，采用了并发的可达性分析技术。它的并发标记阶段时间较长，因此采用了当前时刻的快照来遍历整个对象图，所以就没有暂停用户线程，也就没有出现 STW</p>
-<h3 id="5-参考"><a href="#5-参考" class="headerlink" title="5 参考"></a>5 参考</h3><ul>
-<li><a href="https://juejin.cn/post/6926365727700189198">深入理解JAVA垃圾收集器CMS,G1工作流程原理 - 掘金</a></li>
-<li><a href="https://heapdump.cn/article/1995860">谈谈JVM的垃圾回收器 | HeapDump性能社区</a></li>
-<li>《深入理解 Java 虚拟机：JVM 高级特性与最佳实践》</li>
-<li>《实战 Java 虚拟机：JVM 故障诊断与性能优化》</li>
+<p>在 vim 编辑器中</p>
+<ul>
+<li><p>显示行号：<code>:set nu</code></p>
+</li>
+<li><p>跳到行号为 n 的行：<code>nG</code></p>
+</li>
+<li><p>跳到文件的底部：<code>G</code></p>
+</li>
+<li><p>跳到文件的头部：<code>g</code></p>
+</li>
+<li><p>删除当前行在内的往下 n 行：<code>ndd</code></p>
+</li>
+<li><p>复制从光标开始往右的 n 个单词：<code>nyw</code></p>
+</li>
+<li><p>将包括当前行在内的往下 n 行复制到缓冲区中：<code>nyy</code></p>
+</li>
+<li><p>撤销上一步操作：<code>u</code></p>
+</li>
+<li><p>粘贴缓冲区（剪切板）里的内容到光标后：<code>p</code></p>
+</li>
 </ul>
 ]]></content>
       <categories>
-        <category>JVM</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>TODO</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CMD代理加速</title>
-    <url>/2023/02/08/%E5%85%B6%E4%BB%96/CMD%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/</url>
-    <content><![CDATA[<p>前段时间搭建这个博客的时候，在最后提交时，一直显示网络问题，最后搞了五六次才总算提交到 github 上了，于是，我就在网上看看有没有什么解决的办法，最后发现了这个可行的办法</p>
-<span id="more"></span>
-
-<p>让 CMD 代理加速其实没那么麻烦，其实非常简单</p>
-<p>不知道是不是这个方法太简单了，所以网上的大佬们都不屑于提了</p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>需要使用到 CFW，这个方法就是使用它的一个功能</p>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
-<li>打开主界面的 Allow LAN 开关</li>
-<li>点击 Port 右侧端口号旁边的终端图标</li>
-<li>在弹出的界面中选择 CMD 即可</li>
-</ol>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl https://www.google.com</span><br></pre></td></tr></table></figure>
-
-<p>如果生效的话，响应是一个 html 文件，应该就是首页的那个页面</p>
-<p>如果没有生效的话，会提示超时</p>
-<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><ul>
-<li><a href="https://gist.github.com/dreamlu/cf7cbc0b8329ac145fa44342d6a1c01d">输入命令的操作 | gist of github</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>CMD</tag>
+        <tag>Vim</tag>
       </tags>
   </entry>
   <entry>
@@ -369,40 +340,6 @@
       </categories>
       <tags>
         <tag>Mybatis-Generator</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用CloudFlare解析国内域名</title>
-    <url>/2023/02/11/%E5%85%B6%E4%BB%96/%E4%BD%BF%E7%94%A8CloudFlare%E8%A7%A3%E6%9E%90%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D/</url>
-    <content><![CDATA[<p>我在去年在阿里云上买了个域名，本来想直接用在这个博客上的</p>
-<p>可是，要进行域名备案，他才给解析</p>
-<p>无奈，只能投靠 CloudFlare 的怀抱，使用它提供的免费 DNS 解析服务来对我在阿里云上的域名进行解析</p>
-<span id="more"></span>
-
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="第一步：注册-CF-账号"><a href="#第一步：注册-CF-账号" class="headerlink" title="第一步：注册 CF 账号"></a>第一步：注册 CF 账号</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111025201.jpg"></p>
-<h4 id="第二步：在-CF-上添加站点"><a href="#第二步：在-CF-上添加站点" class="headerlink" title="第二步：在 CF 上添加站点"></a>第二步：在 CF 上添加站点</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111031381.png" alt="image-20230211095254984"></p>
-<p>然后它就会监测该域名目前使用的 DNS 服务器，并且提供两个它的服务器</p>
-<p>目前使用的 DNS 服务器就是阿里云的，接下来就要去阿里云将 DNS 服务器替换成 CF 为我们提供的</p>
-<h4 id="第三步：替换-DNS-服务器地址"><a href="#第三步：替换-DNS-服务器地址" class="headerlink" title="第三步：替换 DNS 服务器地址"></a>第三步：替换 DNS 服务器地址</h4><p>登录阿里云之后，进入该域名的管理界面</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032262.png" alt="image-20230211100039492"></p>
-<p>在左侧栏选择 DNS 修改，之后修改成 CF 为我们提供的 DNS 即可</p>
-<blockquote>
-<p>修改完后，在原 CF 的界面选择操作完成</p>
-</blockquote>
-<h4 id="第四步：等待-CF-发邮件"><a href="#第四步：等待-CF-发邮件" class="headerlink" title="第四步：等待 CF 发邮件"></a>第四步：等待 CF 发邮件</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032534.png" alt="image-20230211100937900"></p>
-<h4 id="第五步：在-CF-中配置-DNS-Records"><a href="#第五步：在-CF-中配置-DNS-Records" class="headerlink" title="第五步：在 CF 中配置 DNS Records"></a>第五步：在 CF 中配置 DNS Records</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032093.png" alt="image-20230211101413224"></p>
-<h4 id="第六步：在-github-中配置自定义域名"><a href="#第六步：在-github-中配置自定义域名" class="headerlink" title="第六步：在 github 中配置自定义域名"></a>第六步：在 github 中配置自定义域名</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032431.png" alt="image-20230211101535403"></p>
-<blockquote>
-<p>这里同样需要在本地 hexo 的 source 文件夹中建立一个 CNAME 文件，文件内容与 github 中刚生成的 CNAME 保持一致即可</p>
-</blockquote>
-<h4 id="第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址"><a href="#第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址" class="headerlink" title="第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址"></a>第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032789.png" alt="image-20230211102058259"></p>
-<p>编辑 hexo 的配置文件 <strong>_config.yml</strong> (非主题的配置文件)，查找关键词 permalink，修改这一部分第一行的 url 地址为博客网站访问地址即可</p>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>CloudFlare</tag>
       </tags>
   </entry>
   <entry>
@@ -442,6 +379,151 @@
       <tags>
         <tag>Mybatis-Generator</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>CMD代理加速</title>
+    <url>/2023/02/08/%E5%85%B6%E4%BB%96/CMD%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<p>前段时间搭建这个博客的时候，在最后提交时，一直显示网络问题，最后搞了五六次才总算提交到 github 上了，于是，我就在网上看看有没有什么解决的办法，最后发现了这个可行的办法</p>
+<span id="more"></span>
+
+<p>让 CMD 代理加速其实没那么麻烦，其实非常简单</p>
+<p>不知道是不是这个方法太简单了，所以网上的大佬们都不屑于提了</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>需要使用到 CFW，这个方法就是使用它的一个功能</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>打开主界面的 Allow LAN 开关</li>
+<li>点击 Port 右侧端口号旁边的终端图标</li>
+<li>在弹出的界面中选择 CMD 即可</li>
+</ol>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl https://www.google.com</span><br></pre></td></tr></table></figure>
+
+<p>如果生效的话，响应是一个 html 文件，应该就是首页的那个页面</p>
+<p>如果没有生效的话，会提示超时</p>
+<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><ul>
+<li><a href="https://gist.github.com/dreamlu/cf7cbc0b8329ac145fa44342d6a1c01d">输入命令的操作 | gist of github</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>CMD</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用CloudFlare解析国内域名</title>
+    <url>/2023/02/11/%E5%85%B6%E4%BB%96/%E4%BD%BF%E7%94%A8CloudFlare%E8%A7%A3%E6%9E%90%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D/</url>
+    <content><![CDATA[<p>我在去年在阿里云上买了个域名，本来想直接用在这个博客上的</p>
+<p>可是，要进行域名备案，他才给解析</p>
+<p>无奈，只能投靠 CloudFlare 的怀抱，使用它提供的免费 DNS 解析服务来对我在阿里云上的域名进行解析</p>
+<span id="more"></span>
+
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="第一步：注册-CF-账号"><a href="#第一步：注册-CF-账号" class="headerlink" title="第一步：注册 CF 账号"></a>第一步：注册 CF 账号</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111025201.jpg"></p>
+<h4 id="第二步：在-CF-上添加站点"><a href="#第二步：在-CF-上添加站点" class="headerlink" title="第二步：在 CF 上添加站点"></a>第二步：在 CF 上添加站点</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111031381.png" alt="image-20230211095254984"></p>
+<p>然后它就会监测该域名目前使用的 DNS 服务器，并且提供两个它的服务器</p>
+<p>目前使用的 DNS 服务器就是阿里云的，接下来就要去阿里云将 DNS 服务器替换成 CF 为我们提供的</p>
+<h4 id="第三步：替换-DNS-服务器地址"><a href="#第三步：替换-DNS-服务器地址" class="headerlink" title="第三步：替换 DNS 服务器地址"></a>第三步：替换 DNS 服务器地址</h4><p>登录阿里云之后，进入该域名的管理界面</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032262.png" alt="image-20230211100039492"></p>
+<p>在左侧栏选择 DNS 修改，之后修改成 CF 为我们提供的 DNS 即可</p>
+<blockquote>
+<p>修改完后，在原 CF 的界面选择操作完成</p>
+</blockquote>
+<h4 id="第四步：等待-CF-发邮件"><a href="#第四步：等待-CF-发邮件" class="headerlink" title="第四步：等待 CF 发邮件"></a>第四步：等待 CF 发邮件</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032534.png" alt="image-20230211100937900"></p>
+<h4 id="第五步：在-CF-中配置-DNS-Records"><a href="#第五步：在-CF-中配置-DNS-Records" class="headerlink" title="第五步：在 CF 中配置 DNS Records"></a>第五步：在 CF 中配置 DNS Records</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032093.png" alt="image-20230211101413224"></p>
+<h4 id="第六步：在-github-中配置自定义域名"><a href="#第六步：在-github-中配置自定义域名" class="headerlink" title="第六步：在 github 中配置自定义域名"></a>第六步：在 github 中配置自定义域名</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032431.png" alt="image-20230211101535403"></p>
+<blockquote>
+<p>这里同样需要在本地 hexo 的 source 文件夹中建立一个 CNAME 文件，文件内容与 github 中刚生成的 CNAME 保持一致即可</p>
+</blockquote>
+<h4 id="第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址"><a href="#第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址" class="headerlink" title="第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址"></a>第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032789.png" alt="image-20230211102058259"></p>
+<p>编辑 hexo 的配置文件 <strong>_config.yml</strong> (非主题的配置文件)，查找关键词 permalink，修改这一部分第一行的 url 地址为博客网站访问地址即可</p>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>CloudFlare</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringMVC常用注解</title>
+    <url>/2023/02/23/SpringMVC/SpringMVC%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<p>SpringMVC 101 第一篇</p>
+<span id="more"></span>
+
+<h3 id="1-Controller"><a href="#1-Controller" class="headerlink" title="1 @Controller"></a>1 @Controller</h3><p>标注控制器以处理 DispatcherServlet 分发的请求</p>
+<h3 id="2-ResponseBody"><a href="#2-ResponseBody" class="headerlink" title="2 @ResponseBody"></a>2 @ResponseBody</h3><p>用于将 Controller 方法返回的对象，根据请求头中 Accept 的内容，通过适当的 HttpMessageConverter 转换为指定格式后，写入 Response 对象的 body 数据区</p>
+<blockquote>
+<p>😀 @Controller + @ResponseBody = @RestController</p>
+</blockquote>
+<h3 id="3-RequestMapping"><a href="#3-RequestMapping" class="headerlink" title="3 @RequestMapping"></a>3 @RequestMapping</h3><p>用于处理<strong>请求地址映射</strong>，可以用在类上，也可以用在方法上</p>
+<p>在这个注解中可以设置请求方法：GET、POST、PUT、DELETE</p>
+<p>但是我一般会使用下列注解代替：</p>
+<ul>
+<li>@PostMapping（增）</li>
+<li>@DeleteMapping（删）</li>
+<li>@PutMapping（改）</li>
+<li>@GetMapping（查）</li>
+</ul>
+<h3 id="4-接收请求参数"><a href="#4-接收请求参数" class="headerlink" title="4 接收请求参数"></a>4 接收请求参数</h3><h4 id="4-1-接收-query-string-参数"><a href="#4-1-接收-query-string-参数" class="headerlink" title="4.1 接收 query string 参数"></a>4.1 接收 query string 参数</h4><p><strong>4.1.1 第一种: url 中参数键值对以问号隔开的</strong></p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">GET http://localhost:8989/ebook/get?id=1</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>application/json</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/ebook/get&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Ebook <span class="title function_">getEbook</span><span class="params">(<span class="meta">@RequestParam(&quot;id&quot;)</span> Long id)</span> &#123;</span><br><span class="line">	<span class="comment">//......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>😀 上述例子中的 @RequestParam 可以省略，但当 url 中参数的 key 与 controller 中方法的形参变量名不一致时，就需要使用到该注解进行映射</p>
+</blockquote>
+<p><strong>4.1.2 第二种: url 中参数键值对中的 value 直接写在路径上的</strong></p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line">GET http://localhost:8989/ebook/get/1</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>application/json</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/ebook/get/&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Ebook <span class="title function_">getEbook</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span> &#123;</span><br><span class="line">	<span class="comment">//......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>🙋‍♂️ 实体类可以接收 query string 这种参数吗？</p>
+</blockquote>
+<p>当入参比较多时，也可以用实体类来进行接收</p>
+<h4 id="4-2-接收请求体中的json数据"><a href="#4-2-接收请求体中的json数据" class="headerlink" title="4.2 接收请求体中的json数据"></a>4.2 接收请求体中的json数据</h4><figure class="highlight http"><table><tr><td class="code"><pre><span class="line">POST http://localhost:8989/ebook/save</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;lisi&quot;,</span><br><span class="line">  &quot;age&quot;: &quot;25&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;/ebook/save&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(<span class="meta">@RequestBody</span> Ebook ebook)</span> &#123;</span><br><span class="line">    <span class="comment">//......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-参考"><a href="#5-参考" class="headerlink" title="5 参考"></a>5 参考</h3><ul>
+<li><a href="https://segmentfault.com/a/1190000039410867">java - 一、SpringMVC常用注解 - 个人文章 - SegmentFault 思否</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>SpringMVC</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SpringMVC执行流程及组件介绍</title>
+    <url>/2023/02/23/SpringMVC/SpringMVC%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E5%8F%8A%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<p>SpringMVC 101 第二篇</p>
+<span id="more"></span>
+
+<h3 id="1-工作流程"><a href="#1-工作流程" class="headerlink" title="1 工作流程"></a>1 工作流程</h3><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302231202066.png" alt="Spring MVC的工作流程"></p>
+<h4 id="1-1-流程解析"><a href="#1-1-流程解析" class="headerlink" title="1.1 流程解析"></a>1.1 流程解析</h4><ol>
+<li>客户端向服务端发送一次请求，这个请求会先到前端控制器 DispatcherServlet</li>
+<li>DispatcherServlet 接收到请求后会调用 HandlerMapping 处理器映射器，然后处理器映射器会返回一个执行链</li>
+<li>DispatcherServlet 调用 HandlerAdapter 处理器适配器，告诉处理器适配器应该要去执行哪一个 Controller</li>
+<li>HandlerAdapter 处理器适配器去执行 Controller 并得到 ModelAndView，然后层层返回给 DispatcherServlet</li>
+<li>DispatcherServlet 将 ModelAndView 交给 ViewReslover 视图解析器解析，然后返回真正的视图</li>
+<li>DispatcherServlet 将模型数据填充到视图中，然后将结果响应给客户端</li>
+</ol>
+<h4 id="1-2-组件说明"><a href="#1-2-组件说明" class="headerlink" title="1.2 组件说明"></a>1.2 组件说明</h4><ul>
+<li>DispatcherServlet：前端控制器。整个流程控制的中心</li>
+<li>HandlerMapping: 处理器映射器。负责根据用户请求的 URL 找到 Handler 处理器</li>
+<li>Handler：处理器。在 DispatcherServlet 的控制下 Handler 对具体的用户请求进行处理</li>
+<li>HandlerAdapter: 处理器适配器。通过 HandlerAdapter 对处理器进行执行，这时适配器模式的应用</li>
+<li>ModelAndView：SpringMVC 的封装对象，将 model 和 view 封装在一起</li>
+<li>ViewResolver：视图解析器。负责处理结果生成 View 视图</li>
+<li>View：SpringMVC 的封装对象，是一个接口。SpringMVC 提供了许多的 View 视图类型，包括 jspview、pdfview 等</li>
+</ul>
+<h3 id="2-参考"><a href="#2-参考" class="headerlink" title="2 参考"></a>2 参考</h3><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/148557490">MVC模式总结和SpringMVC流程及组件整理 - 知乎</a></li>
+<li><a href="https://tobebetterjavaer.com/sidebar/sanfene/spring.html#_28-spring-mvc-%E7%9A%84%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6">面渣逆袭（Spring面试题八股文）必看👍 | Java程序员进阶之路</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>SpringMVC</category>
+      </categories>
   </entry>
   <entry>
     <title>Antdv分页表格界面</title>
