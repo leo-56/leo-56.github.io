@@ -19,6 +19,36 @@
       </categories>
   </entry>
   <entry>
+    <title>Hexo文章阴影添加</title>
+    <url>/2023/02/09/Hexo/Hexo%E6%96%87%E7%AB%A0%E9%98%B4%E5%BD%B1%E6%B7%BB%E5%8A%A0/</url>
+    <content><![CDATA[<p>在 hexo 博客中使用了 next 主题，可以使用这篇博文中的方法来给博客中的文章边框加上阴影</p>
+<span id="more"></span>
+
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>打开 <code>themes\next\source\css\_common\components\post</code> 目录，在该目录中对 <strong>post.styl</strong> 文件进行编辑</p>
+<p>使用快捷键找到 <code>motion.transition.post_block</code> 这一项（文件中只有一个位置）</p>
+<p>将下列 if 语句</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.use-motion</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">hexo-config</span>(<span class="string">&#x27;motion.transition.post_block&#x27;</span>)) &#123;</span><br><span class="line">    <span class="selector-class">.post-block</span>, <span class="selector-class">.pagination</span>, <span class="selector-class">.comments</span> &#123;</span><br><span class="line">      <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改成</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.use-motion</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">hexo-config</span>(<span class="string">&#x27;motion.transition.post_block&#x27;</span>)) &#123;</span><br><span class="line">        .post-block&#123;</span><br><span class="line">            <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">            <span class="attribute">margin-top</span>: <span class="number">60px</span>;</span><br><span class="line">            <span class="attribute">margin-bottom</span>: <span class="number">60px</span>;</span><br><span class="line">            <span class="attribute">padding</span>: <span class="number">25px</span>;</span><br><span class="line">            -webkit-<span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgba</span>(<span class="number">202</span>, <span class="number">203</span>, <span class="number">203</span>, <span class="number">1</span>);</span><br><span class="line">            -moz-<span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgba</span>(<span class="number">202</span>, <span class="number">203</span>, <span class="number">204</span>, <span class="number">1</span>);</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="selector-class">.pagination</span>, <span class="selector-class">.comments</span> &#123;</span><br><span class="line">            <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后去掉这个文件中的</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;post-eof&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>然后…然后就大功告成了</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091531808.png" alt="image-20230209152955170"></p>
+<blockquote>
+<p>ps. 之后可以使用 <code>hexo s</code> 在本地看看效果，然后再决定是否同步到 github 上</p>
+</blockquote>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/468831542">Hexo+Next为首页文章添加边框阴影[绝对有效] - 知乎</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Git去除第一条提交</title>
     <url>/2023/02/11/Git/Git%E5%88%A0%E9%99%A4%E7%AC%AC%E4%B8%80%E6%9D%A1%E6%8F%90%E4%BA%A4/</url>
     <content><![CDATA[<p>一般修改上一条提交可以使用：</p>
@@ -351,6 +381,38 @@
       </tags>
   </entry>
   <entry>
+    <title>SpringBoot面试题</title>
+    <url>/2023/02/23/SpringBoot/SpringBoot%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
+    <content><![CDATA[<p>SpringBoot 101 面试题</p>
+<span id="more"></span>
+
+<blockquote>
+<p>🙋‍♂️ SpringBoot 有哪些优点？</p>
+</blockquote>
+<p>SpringBoot 以约定大于配置核心思想开展工作，相比 Spring 具有如下优势：</p>
+<ul>
+<li>可以快速创建独立的 Spring 应用程序</li>
+<li>内嵌了如 Tomcat 这样的 Web 容器，能直接跑起来</li>
+<li>无需一堆繁琐的 xml 文件配置（YAML 或 properties 文件）</li>
+<li>可以快速整合常用依赖</li>
+<li>会根据引入的依赖提供一些默认的配置供我们使用（自动配置）</li>
+</ul>
+<blockquote>
+<p>🙋‍♂️ 什么是约定大于配置？</p>
+</blockquote>
+<p>约定大于配置，也称按约定编程，是一种软件设计范式。开发人员仅需规定应用中不符约定的部分</p>
+<blockquote>
+<p>🙋‍♂️ SpringBoot 自动配置的原理？</p>
+</blockquote>
+<p>SpringBoot 启动类的注解 <code>@SpringBootApplication</code> 的子注解中包含了<code> @SpringBootConfiguration</code> 和 <code>@EnableAutoConfiguration</code></p>
+<p>前者是指定注解的类为配置类，后者是开启自动配置</p>
+<p>在 <code>@EnableAutoConfiguration</code> 注解中，包含了一个<br><code>@Import(&#123;AutoConfigurationImportSelector.class&#125;)</code> 注解，这个注解就向配置类导入自动配置</p>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Spring中的IoC与AOP</title>
     <url>/2023/02/23/SpringFramework/Spring%E4%B8%AD%E7%9A%84IoC%E4%B8%8EAOP/</url>
     <content><![CDATA[<p>Spring Framework 101 第一篇</p>
@@ -438,99 +500,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Hexo文章阴影添加</title>
-    <url>/2023/02/09/Hexo/Hexo%E6%96%87%E7%AB%A0%E9%98%B4%E5%BD%B1%E6%B7%BB%E5%8A%A0/</url>
-    <content><![CDATA[<p>在 hexo 博客中使用了 next 主题，可以使用这篇博文中的方法来给博客中的文章边框加上阴影</p>
-<span id="more"></span>
-
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>打开 <code>themes\next\source\css\_common\components\post</code> 目录，在该目录中对 <strong>post.styl</strong> 文件进行编辑</p>
-<p>使用快捷键找到 <code>motion.transition.post_block</code> 这一项（文件中只有一个位置）</p>
-<p>将下列 if 语句</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.use-motion</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">hexo-config</span>(<span class="string">&#x27;motion.transition.post_block&#x27;</span>)) &#123;</span><br><span class="line">    <span class="selector-class">.post-block</span>, <span class="selector-class">.pagination</span>, <span class="selector-class">.comments</span> &#123;</span><br><span class="line">      <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>修改成</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.use-motion</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">hexo-config</span>(<span class="string">&#x27;motion.transition.post_block&#x27;</span>)) &#123;</span><br><span class="line">        .post-block&#123;</span><br><span class="line">            <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">            <span class="attribute">margin-top</span>: <span class="number">60px</span>;</span><br><span class="line">            <span class="attribute">margin-bottom</span>: <span class="number">60px</span>;</span><br><span class="line">            <span class="attribute">padding</span>: <span class="number">25px</span>;</span><br><span class="line">            -webkit-<span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgba</span>(<span class="number">202</span>, <span class="number">203</span>, <span class="number">203</span>, <span class="number">1</span>);</span><br><span class="line">            -moz-<span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">5px</span> <span class="built_in">rgba</span>(<span class="number">202</span>, <span class="number">203</span>, <span class="number">204</span>, <span class="number">1</span>);</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="selector-class">.pagination</span>, <span class="selector-class">.comments</span> &#123;</span><br><span class="line">            <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后去掉这个文件中的</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;post-eof&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>然后…然后就大功告成了</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302091531808.png" alt="image-20230209152955170"></p>
-<blockquote>
-<p>ps. 之后可以使用 <code>hexo s</code> 在本地看看效果，然后再决定是否同步到 github 上</p>
-</blockquote>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="https://zhuanlan.zhihu.com/p/468831542">Hexo+Next为首页文章添加边框阴影[绝对有效] - 知乎</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>CMD代理加速</title>
-    <url>/2023/02/08/%E5%85%B6%E4%BB%96/CMD%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/</url>
-    <content><![CDATA[<p>前段时间搭建这个博客的时候，在最后提交时，一直显示网络问题，最后搞了五六次才总算提交到 github 上了，于是，我就在网上看看有没有什么解决的办法，最后发现了这个可行的办法</p>
-<span id="more"></span>
-
-<p>让 CMD 代理加速其实没那么麻烦，其实非常简单</p>
-<p>不知道是不是这个方法太简单了，所以网上的大佬们都不屑于提了</p>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>需要使用到 CFW，这个方法就是使用它的一个功能</p>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
-<li>打开主界面的 Allow LAN 开关</li>
-<li>点击 Port 右侧端口号旁边的终端图标</li>
-<li>在弹出的界面中选择 CMD 即可</li>
-</ol>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl https://www.google.com</span><br></pre></td></tr></table></figure>
-
-<p>如果生效的话，响应是一个 html 文件，应该就是首页的那个页面</p>
-<p>如果没有生效的话，会提示超时</p>
-<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><ul>
-<li><a href="https://gist.github.com/dreamlu/cf7cbc0b8329ac145fa44342d6a1c01d">输入命令的操作 | gist of github</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>CMD</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用CloudFlare解析国内域名</title>
-    <url>/2023/02/11/%E5%85%B6%E4%BB%96/%E4%BD%BF%E7%94%A8CloudFlare%E8%A7%A3%E6%9E%90%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D/</url>
-    <content><![CDATA[<p>我在去年在阿里云上买了个域名，本来想直接用在这个博客上的</p>
-<p>可是，要进行域名备案，他才给解析</p>
-<p>无奈，只能投靠 CloudFlare 的怀抱，使用它提供的免费 DNS 解析服务来对我在阿里云上的域名进行解析</p>
-<span id="more"></span>
-
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="第一步：注册-CF-账号"><a href="#第一步：注册-CF-账号" class="headerlink" title="第一步：注册 CF 账号"></a>第一步：注册 CF 账号</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111025201.jpg"></p>
-<h4 id="第二步：在-CF-上添加站点"><a href="#第二步：在-CF-上添加站点" class="headerlink" title="第二步：在 CF 上添加站点"></a>第二步：在 CF 上添加站点</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111031381.png" alt="image-20230211095254984"></p>
-<p>然后它就会监测该域名目前使用的 DNS 服务器，并且提供两个它的服务器</p>
-<p>目前使用的 DNS 服务器就是阿里云的，接下来就要去阿里云将 DNS 服务器替换成 CF 为我们提供的</p>
-<h4 id="第三步：替换-DNS-服务器地址"><a href="#第三步：替换-DNS-服务器地址" class="headerlink" title="第三步：替换 DNS 服务器地址"></a>第三步：替换 DNS 服务器地址</h4><p>登录阿里云之后，进入该域名的管理界面</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032262.png" alt="image-20230211100039492"></p>
-<p>在左侧栏选择 DNS 修改，之后修改成 CF 为我们提供的 DNS 即可</p>
-<blockquote>
-<p>修改完后，在原 CF 的界面选择操作完成</p>
-</blockquote>
-<h4 id="第四步：等待-CF-发邮件"><a href="#第四步：等待-CF-发邮件" class="headerlink" title="第四步：等待 CF 发邮件"></a>第四步：等待 CF 发邮件</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032534.png" alt="image-20230211100937900"></p>
-<h4 id="第五步：在-CF-中配置-DNS-Records"><a href="#第五步：在-CF-中配置-DNS-Records" class="headerlink" title="第五步：在 CF 中配置 DNS Records"></a>第五步：在 CF 中配置 DNS Records</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032093.png" alt="image-20230211101413224"></p>
-<h4 id="第六步：在-github-中配置自定义域名"><a href="#第六步：在-github-中配置自定义域名" class="headerlink" title="第六步：在 github 中配置自定义域名"></a>第六步：在 github 中配置自定义域名</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032431.png" alt="image-20230211101535403"></p>
-<blockquote>
-<p>这里同样需要在本地 hexo 的 source 文件夹中建立一个 CNAME 文件，文件内容与 github 中刚生成的 CNAME 保持一致即可</p>
-</blockquote>
-<h4 id="第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址"><a href="#第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址" class="headerlink" title="第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址"></a>第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032789.png" alt="image-20230211102058259"></p>
-<p>编辑 hexo 的配置文件 <strong>_config.yml</strong> (非主题的配置文件)，查找关键词 permalink，修改这一部分第一行的 url 地址为博客网站访问地址即可</p>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>CloudFlare</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SpringMVC常用注解</title>
     <url>/2023/02/23/SpringMVC/SpringMVC%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/</url>
     <content><![CDATA[<p>SpringMVC 101 第一篇</p>
@@ -611,6 +580,86 @@
       <categories>
         <category>SpringMVC</category>
       </categories>
+  </entry>
+  <entry>
+    <title>CMD代理加速</title>
+    <url>/2023/02/08/%E5%85%B6%E4%BB%96/CMD%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<p>前段时间搭建这个博客的时候，在最后提交时，一直显示网络问题，最后搞了五六次才总算提交到 github 上了，于是，我就在网上看看有没有什么解决的办法，最后发现了这个可行的办法</p>
+<span id="more"></span>
+
+<p>让 CMD 代理加速其实没那么麻烦，其实非常简单</p>
+<p>不知道是不是这个方法太简单了，所以网上的大佬们都不屑于提了</p>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><p>需要使用到 CFW，这个方法就是使用它的一个功能</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>打开主界面的 Allow LAN 开关</li>
+<li>点击 Port 右侧端口号旁边的终端图标</li>
+<li>在弹出的界面中选择 CMD 即可</li>
+</ol>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl https://www.google.com</span><br></pre></td></tr></table></figure>
+
+<p>如果生效的话，响应是一个 html 文件，应该就是首页的那个页面</p>
+<p>如果没有生效的话，会提示超时</p>
+<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><ul>
+<li><a href="https://gist.github.com/dreamlu/cf7cbc0b8329ac145fa44342d6a1c01d">输入命令的操作 | gist of github</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>CMD</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSD管理软件</title>
+    <url>/2023/02/25/%E5%85%B6%E4%BB%96/SSD%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<h3 id="1-西部数据"><a href="#1-西部数据" class="headerlink" title="1 西部数据"></a>1 西部数据</h3><p>下载地址：<a href="https://support-cn.wd.com/app/answers/detailweb/a_id/7622">WD 产品的软件、固件和驱动程序</a></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302251532001.png" alt="image-20230225153043663"></p>
+<h3 id="2-东芝铠侠"><a href="#2-东芝铠侠" class="headerlink" title="2 东芝铠侠"></a>2 东芝铠侠</h3><p>下载地址：<a href="https://www.kioxia.com.cn/zh-cn/personal/software/ssd-utility.html">铠侠SSD软件管理工具-SSD Utility-铠侠软件下载 | KIOXIA - China</a></p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302251532864.png" alt="image-20230225153132165"></p>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>SSD</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用CloudFlare解析国内域名</title>
+    <url>/2023/02/11/%E5%85%B6%E4%BB%96/%E4%BD%BF%E7%94%A8CloudFlare%E8%A7%A3%E6%9E%90%E5%9B%BD%E5%86%85%E5%9F%9F%E5%90%8D/</url>
+    <content><![CDATA[<p>我在去年在阿里云上买了个域名，本来想直接用在这个博客上的</p>
+<p>可是，要进行域名备案，他才给解析</p>
+<p>无奈，只能投靠 CloudFlare 的怀抱，使用它提供的免费 DNS 解析服务来对我在阿里云上的域名进行解析</p>
+<span id="more"></span>
+
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="第一步：注册-CF-账号"><a href="#第一步：注册-CF-账号" class="headerlink" title="第一步：注册 CF 账号"></a>第一步：注册 CF 账号</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111025201.jpg"></p>
+<h4 id="第二步：在-CF-上添加站点"><a href="#第二步：在-CF-上添加站点" class="headerlink" title="第二步：在 CF 上添加站点"></a>第二步：在 CF 上添加站点</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111031381.png" alt="image-20230211095254984"></p>
+<p>然后它就会监测该域名目前使用的 DNS 服务器，并且提供两个它的服务器</p>
+<p>目前使用的 DNS 服务器就是阿里云的，接下来就要去阿里云将 DNS 服务器替换成 CF 为我们提供的</p>
+<h4 id="第三步：替换-DNS-服务器地址"><a href="#第三步：替换-DNS-服务器地址" class="headerlink" title="第三步：替换 DNS 服务器地址"></a>第三步：替换 DNS 服务器地址</h4><p>登录阿里云之后，进入该域名的管理界面</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032262.png" alt="image-20230211100039492"></p>
+<p>在左侧栏选择 DNS 修改，之后修改成 CF 为我们提供的 DNS 即可</p>
+<blockquote>
+<p>修改完后，在原 CF 的界面选择操作完成</p>
+</blockquote>
+<h4 id="第四步：等待-CF-发邮件"><a href="#第四步：等待-CF-发邮件" class="headerlink" title="第四步：等待 CF 发邮件"></a>第四步：等待 CF 发邮件</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032534.png" alt="image-20230211100937900"></p>
+<h4 id="第五步：在-CF-中配置-DNS-Records"><a href="#第五步：在-CF-中配置-DNS-Records" class="headerlink" title="第五步：在 CF 中配置 DNS Records"></a>第五步：在 CF 中配置 DNS Records</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032093.png" alt="image-20230211101413224"></p>
+<h4 id="第六步：在-github-中配置自定义域名"><a href="#第六步：在-github-中配置自定义域名" class="headerlink" title="第六步：在 github 中配置自定义域名"></a>第六步：在 github 中配置自定义域名</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032431.png" alt="image-20230211101535403"></p>
+<blockquote>
+<p>这里同样需要在本地 hexo 的 source 文件夹中建立一个 CNAME 文件，文件内容与 github 中刚生成的 CNAME 保持一致即可</p>
+</blockquote>
+<h4 id="第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址"><a href="#第七步（可选）：修改-hexo-配置，为每篇文章自动生成页尾地址" class="headerlink" title="第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址"></a>第七步（可选）：修改 hexo 配置，为每篇文章自动生成页尾地址</h4><p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302111032789.png" alt="image-20230211102058259"></p>
+<p>编辑 hexo 的配置文件 <strong>_config.yml</strong> (非主题的配置文件)，查找关键词 permalink，修改这一部分第一行的 url 地址为博客网站访问地址即可</p>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>CloudFlare</tag>
+      </tags>
   </entry>
   <entry>
     <title>Antdv分页表格界面</title>
@@ -699,6 +748,23 @@
       </tags>
   </entry>
   <entry>
+    <title>Antdv让页面中的组件间隔一段距离</title>
+    <url>/2023/02/13/%E5%89%8D%E7%AB%AF/Ant-Design-Vue/Antdv%E8%AE%A9%E7%BB%84%E4%BB%B6%E9%97%B4%E9%97%B4%E9%9A%94%E4%B8%80%E6%AE%B5%E8%B7%9D%E7%A6%BB/</url>
+    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306124.png" alt="image-20230210230040875"></p>
+<p>紧贴着，不太好看，也可能不符合要求</p>
+<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306380.png" alt="image-20230210230143250"></p>
+<p>只需要将上面的组件或下面的组件使用标签 <code>&lt;p&gt;&lt;/p&gt;</code> 包住就可以了，<code>&lt;div&gt;</code> 还不行</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a-form</span> <span class="attr">layout</span>=<span class="string">&quot;inline&quot;</span> <span class="attr">:wrapperCol</span>=<span class="string">&quot;&#123;span: 40&#125;&quot;</span> <span class="attr">:model</span>=<span class="string">&quot;param&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-input</span> <span class="attr">v-model:value</span>=<span class="string">&quot;param.name&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;search ebook by name&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;handleQuery(&#123;page: 1, size: pagination.pageSize&#125;)&quot;</span>&gt;</span>查找<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;addEbook&quot;</span>&gt;</span>新增<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">a-form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Antdv</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Antdv表格布局中的小误区</title>
     <url>/2023/02/10/%E5%89%8D%E7%AB%AF/Ant-Design-Vue/Antdv%E8%A1%A8%E6%A0%BC%E5%B8%83%E5%B1%80%E4%B8%AD%E7%9A%84%E5%B0%8F%E8%AF%AF%E5%8C%BA/</url>
     <content><![CDATA[<p>在表格布局中的 layout 前面加了个冒号 <code>:</code>，搞得我弄了半天</p>
@@ -716,23 +782,6 @@
 <h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>之后我发现在文档中有另一个样式的代码中就直接使用了 layout，而没有加引号</p>
 <p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302102331482.png" alt="image-20230210230916668"></p>
 <p>不太明白为什么写文档的人不区分一下这两种，让我这样的菜鸟真的很难受</p>
-]]></content>
-      <categories>
-        <category>Antdv</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Antdv让页面中的组件间隔一段距离</title>
-    <url>/2023/02/13/%E5%89%8D%E7%AB%AF/Ant-Design-Vue/Antdv%E8%AE%A9%E7%BB%84%E4%BB%B6%E9%97%B4%E9%97%B4%E9%9A%94%E4%B8%80%E6%AE%B5%E8%B7%9D%E7%A6%BB/</url>
-    <content><![CDATA[<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306124.png" alt="image-20230210230040875"></p>
-<p>紧贴着，不太好看，也可能不符合要求</p>
-<p><img src="https://raw.githubusercontent.com/leo-56/anki-pics/another/pics/202302132306380.png" alt="image-20230210230143250"></p>
-<p>只需要将上面的组件或下面的组件使用标签 <code>&lt;p&gt;&lt;/p&gt;</code> 包住就可以了，<code>&lt;div&gt;</code> 还不行</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a-form</span> <span class="attr">layout</span>=<span class="string">&quot;inline&quot;</span> <span class="attr">:wrapperCol</span>=<span class="string">&quot;&#123;span: 40&#125;&quot;</span> <span class="attr">:model</span>=<span class="string">&quot;param&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-input</span> <span class="attr">v-model:value</span>=<span class="string">&quot;param.name&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;search ebook by name&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;handleQuery(&#123;page: 1, size: pagination.pageSize&#125;)&quot;</span>&gt;</span>查找<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;addEbook&quot;</span>&gt;</span>新增<span class="tag">&lt;/<span class="name">a-button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">a-form-item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">a-form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>Antdv</category>
