@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>在 SpaceShip 上购买域名</title>
+    <url>/2024/07/20/buy-domain-in-SpaceShip/</url>
+    <content><![CDATA[<p>准备博客域名的时候一直在挑选合适的域名提供商，在这个过程中，找到了 SpaceShip 这个平台，觉得还不错</p>
+<span id="more"></span>
+
+<p>经过对比 SpaceShip 上的域名与其他平台相比较为便宜，之后有域名需求可在这个平台上购买</p>
+<p>这个平台支持 PayPal，比较方便</p>
+<p>选中域名后需要填写一个地址，这里可以填写一个虚拟的国外地址，<a href="https://www.meiguodizhi.com/">这里</a> 可以生成随机地址</p>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Github Page 防止自定义域名设置被覆盖</title>
+    <url>/2024/07/20/github-page-prevent-diy-domain-invalid/</url>
+    <content><![CDATA[<p>在使用 Github Page 的时候，设置过自定义域名了，但是有时候出现访问域名的时候，跳转到一个 404 页面，经过排查后，发现问题所在</p>
+<p><img src="https://img.jmingz.top/2024/07/936115901a4da38eb88dd8a0f209f5d9.png" alt="image-20240719174134946"></p>
+<span id="more"></span>
+
+<h3 id="1-问题排查"><a href="#1-问题排查" class="headerlink" title="1 问题排查"></a>1 问题排查</h3><p>我发现每次出现 404 都是在部署之后，随即查看了 Github Page 的自定义域名框，发现之前设置好的域名居然为空了，在网上查找后，原来是仓库根目录下的 CNAME 文件被覆盖了</p>
+<p>我们在 Github 上设置好自定义域名之后，会在当前仓库的根目录创建一个 CNAME 文件，文件内容很简单，就是刚刚填写的验证通过的域名</p>
+<blockquote>
+<p>🙋‍♂️ 那为什么会被覆盖呢？</p>
+</blockquote>
+<p>因为在本地没有同步创建相应的 CNAME 文件，导致每次部署生成的静态文件中也就没有包含这个文件，使得回到了之前未设置自定义域名时的状态</p>
+<h3 id="2-解决办法"><a href="#2-解决办法" class="headerlink" title="2 解决办法"></a>2 解决办法</h3><p>在 Gihub 上设置自定义域名之后，在本地的相应位置创建相同的 CNAME 文件</p>
+<blockquote>
+<p>🙋‍♂️ 在哪创建这个文件呢？</p>
+</blockquote>
+<p>在根目录下的 source 目录下创建 CNAME 文件就可以了</p>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>Github Page</tag>
+        <tag>域名</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何搭建一个简单博客</title>
+    <url>/2024/07/20/how-to-build-a-simple-blog/</url>
+    <content><![CDATA[<p>今天开始将一些本地的笔记搬到线上来，随即，搭建了这样的一个简单能用的博客</p>
+<span id="more"></span>
+
+<h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><p>使用了以下东西：</p>
+<ul>
+<li><code>Hexo</code>：简单，使用人数多的博客框架</li>
+<li><code>Github</code>：笔记文件的版本控制</li>
+<li><code>Github Page</code>：静态文件托管</li>
+<li><code>Github Action</code>：源文件与静态文件为两个仓库，Push 到源文件仓库后，自动触发，部署到静态文件仓库</li>
+<li><code>Cloudflare</code>：域名管理、URL缩短、防盗链实现、CDN 加速等</li>
+<li><code>BackBlaze</code>：成本可忽略不计的对象存储服务</li>
+<li><code>SpaceShip</code>：域名购买</li>
+</ul>
+<h3 id="相关笔记"><a href="#相关笔记" class="headerlink" title="相关笔记"></a>相关笔记</h3><ul>
+<li><p>使用 Git 子模块管理 Hexo 的多个主题</p>
+</li>
+<li><p>Github Page 防止自定义域名设置被覆盖</p>
+</li>
+<li><p>Hexo 常用命令</p>
+</li>
+<li><p>CI 实战：使用 Github Action 跨仓库部署个人博客</p>
+</li>
+<li><p>在 SpaceShip 上购买域名</p>
+</li>
+<li><p>博客图床方案：BackBlaze + Cloudflare</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>方便的网络工具</title>
+    <url>/2024/07/20/network-useful-tools-link-list/</url>
+    <content><![CDATA[<p>所搜集的一些对个人而言比较方便的网络工具，持续更新中…</p>
+<span id="more"></span>
+
+<h3 id="博文写作辅助"><a href="#博文写作辅助" class="headerlink" title="博文写作辅助"></a>博文写作辅助</h3><ul>
+<li>表情：<a href="https://getemoji.com/">GetEmoji - Copy &amp; Paste All Emojis From The Emoji Keyboard - No apps required</a></li>
+</ul>
+<h3 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h3><ul>
+<li>DNS 测速：<a href="https://tool.chinaz.com/dns">Dns检测|Dns查询 - 站长工具</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>博客图床方案：BackBlaze + Cloudflare</title>
+    <url>/2024/07/20/to-get-a-blog-image-repo-with-backblaze-and-cloudflare/</url>
+    <content><![CDATA[<p>对文章中图片的处理一直令我感到头痛。从最开始的放在本地，到使用 Github 图床，到使用七牛云 Kodo 图床</p>
+<p>Github 图床的缺点是访问速度慢，Kodo 倒是配好之后一直很稳定，我已经使用很长一段时间了，因为一些特殊原因，还是决定忍痛对 Kodo 图床进行迁移，长痛不如短痛</p>
+<p>在网上寻找合适的图床方案时，我发现了 BackBlaze + Cloudflare 这一解决方案</p>
+<span id="more"></span>
+
+<h3 id="1-创建-Public-Bucket"><a href="#1-创建-Public-Bucket" class="headerlink" title="1 创建 Public Bucket"></a>1 创建 Public Bucket</h3><p>首先创建一个 BackBlaze 账号，之后在 B2 Cloud Storage 中创建 Bucket</p>
+<p>需要修改两个地方：</p>
+<ul>
+<li>一个是填写一个 Bucket Name，这个很重要，可以在 <a href="https://suijimimashengcheng.bmcx.com/">这里</a> 创建一个短密码填到这个地方</li>
+<li>另一个地方是将 Files in Bucket are 这里选择 Public</li>
+</ul>
+<p>其他的地方不用动</p>
+<blockquote>
+<p>第一次使用时，这里需要充 1 美元，充值方式支持 Visa 卡，但不支持 Paypal，使用国内办理的 Visa 卡也是可以的</p>
+</blockquote>
+<p><img src="https://img.jmingz.top/2024/07/21494ae27304d3d1931bcfa0840df56e.png" alt="image-20240719205540713"></p>
+<h3 id="2-获取-Bucket-信息"><a href="#2-获取-Bucket-信息" class="headerlink" title="2 获取 Bucket 信息"></a>2 获取 Bucket 信息</h3><p>创建好 Bucket 后，上传一张图片，点击图片后，在弹出的 Details 框中找到 Friendly URL：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">https://f005.backblazeb2.com/file/a-unique-bucket-name/test.jpg</span><br></pre></td></tr></table></figure>
+
+<p>之后使用自己域名访问时需要用到上面的东西：</p>
+<ul>
+<li><code>f005.backblazeb2.com</code>（这个可能会有差异，以自己的为准）</li>
+<li><code>file/a-unique-bucket-name</code>（这个就是固定的 file 和之前设置的 Bucket 名）</li>
+</ul>
+<h3 id="3-配置-Cloudflare"><a href="#3-配置-Cloudflare" class="headerlink" title="3 配置 Cloudflare"></a>3 配置 Cloudflare</h3><p>想要配置 Cloudflare 之前，首先要有一个 CF 账号，注册账号无需赘言</p>
+<h4 id="3-1-添加站点"><a href="#3-1-添加站点" class="headerlink" title="3.1 添加站点"></a>3.1 添加站点</h4><p>将之前购买的域名添加到 CloudFlare 中，以 SpaceShip 为例，在购买域名后，只需要将 SpaceShip 中域名的 Nameserver 改成从 CF 得到的就可以了</p>
+<p>之后就等待站点激活即可</p>
+<h4 id="3-2-设置-SSL-加密模式"><a href="#3-2-设置-SSL-加密模式" class="headerlink" title="3.2 设置 SSL 加密模式"></a>3.2 设置 SSL 加密模式</h4><p>将 SSL 加密模式设置为 <strong>完全（严格）</strong></p>
+<blockquote>
+<p>😉 这个设置是必要的，以下设置让 CF 服务器通过 HTTPS 与 BackBlaze 发送请求，若不做该设置，将会出现返回 404 的情况</p>
+</blockquote>
+<p><img src="https://img.jmingz.top/2024/07/c3c4f3d96898515b9f83efc26fcf059c.png" alt="image-20240719205144253"></p>
+<h4 id="3-3-配置二级域名访问图片"><a href="#3-3-配置二级域名访问图片" class="headerlink" title="3.3 配置二级域名访问图片"></a>3.3 配置二级域名访问图片</h4><h5 id="3-3-1-添加域名解析记录"><a href="#3-3-1-添加域名解析记录" class="headerlink" title="3.3.1 添加域名解析记录"></a>3.3.1 添加域名解析记录</h5><p>首先，在 DNS 解析中，添加一条 CNAME 记录，将一个二级域名（例如 img.jmingz.top）指向之前获取的 Bucket 信息中的主机名 <code>f005.backblazeb2.com</code>，并开启 CF 代理（开启橘色小云朵）</p>
+<h5 id="3-3-2-添加转换规则"><a href="#3-3-2-添加转换规则" class="headerlink" title="3.3.2 添加转换规则"></a>3.3.2 添加转换规则</h5><p>添加转换规则可以实现图片的访问路径缩短，隐藏 Bucket 名：</p>
+<p><code>https://f005.backblazeb2.com/file/a-unique-bucket-name/test.jpg</code> &#x3D;&#x3D;&gt; <code>https://img.jmingz.top/test.jpg</code></p>
+<p>首先进入转换规则的编辑页面：规则 &#x3D;&gt; 转换规则 &#x3D;&gt; 重写 URL</p>
+<p><img src="https://img.jmingz.top/2024/07/cb625e804536738d2561e22ed84f5255.png" alt="image-20240719212446662"></p>
+<p>下面填写的是 <code>concat(&quot;/file/a-unique-bucket-name&quot;,http.request.uri.path)</code></p>
+<p><img src="https://img.jmingz.top/2024/07/3bee363eeb10fa85b8734cbc8a76c192.png" alt="image-20240719212546371"></p>
+<h4 id="3-4-防盗链设置"><a href="#3-4-防盗链设置" class="headerlink" title="3.4 防盗链设置"></a>3.4 防盗链设置</h4><blockquote>
+<p>😄 实现可在本地正常显示图片并且在白名单站点中正常显示</p>
+</blockquote>
+<p>进入防火墙的自定义规则编辑中：安全性 &#x3D;&gt; WAF &#x3D;&gt; 自定义规则</p>
+<p>创建第一条规则：</p>
+<p><img src="https://img.jmingz.top/2024/07/5714a9be34bdd317a761320de326fbf6.png" alt="image-20240719214700679"></p>
+<p>创建第二条规则：</p>
+<p><img src="https://img.jmingz.top/2024/07/db0332194f042e00ef779722304dec95.png" alt="image-20240719214821991"></p>
+<h4 id="3-5-设置页面规则"><a href="#3-5-设置页面规则" class="headerlink" title="3.5 设置页面规则"></a>3.5 设置页面规则</h4><p>进入页面规则设置界面：规则 &#x3D;&gt; 页面规则</p>
+<p>URL 中填写 <code>https://your-second-domain/file/a-unique-bucket-name/*</code></p>
+<p><img src="https://img.jmingz.top/2024/07/f78f3e68548be977ae24ff3b4ccd6786.png" alt="image-20240719215407025"></p>
+<p>进入到 BackBlaze 的 Bucket 设置中，在 Bucket info 中填写 <code>&#123;&quot;cache-control&quot;:&quot;max-age=720000&quot;&#125;</code></p>
+<h3 id="4-去除不必要的响应-Header"><a href="#4-去除不必要的响应-Header" class="headerlink" title="4 去除不必要的响应 Header"></a>4 去除不必要的响应 Header</h3><p>TODO</p>
+<h3 id="5-PicGo-设置"><a href="#5-PicGo-设置" class="headerlink" title="5 PicGo 设置"></a>5 PicGo 设置</h3><p>PicGo 需要安装一个插件</p>
+<p><img src="https://img.jmingz.top/2024/07/0f048c1db10b9b07c7f152a11d221316.png" alt="image-20240719220546982"></p>
+<p>另外，需要配置的项有：</p>
+<ul>
+<li>应用密钥 ID（在 BackBlaze 中的 Application Keys 生成）</li>
+<li>应用密钥（在 BackBlaze 中的 Application Keys 生成）</li>
+<li>桶名</li>
+<li>文件路径（默认值就可以了）</li>
+<li>自定义节点（endpoint）</li>
+<li>自定义域名（填之前做过解析的二级域名）</li>
+</ul>
+<blockquote>
+<p>注意：自定义节点前要加 <code>https://</code> 否则会报错</p>
+</blockquote>
+<h3 id="6-参考"><a href="#6-参考" class="headerlink" title="6 参考"></a>6 参考</h3><ul>
+<li><p><a href="https://leonis.cc/sui-sui-nian/2023-11-17-deploy-backblaze-image-hosting.html">Cloudflare + Backblaze 实现免费的博客图床方案 - Leo’s blog</a></p>
+</li>
+<li><p><a href="https://blog.xiaoz.org/archives/17544/comment-page-1">通过CloudFlare转换规则隐藏Backblaze B2的bucket路径 - 小z博客</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>解决方案</category>
+      </categories>
+      <tags>
+        <tag>图床</tag>
+        <tag>BackBlaze</tag>
+        <tag>Cloudflare</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Git 子模块管理 Hexo 的多个主题</title>
+    <url>/2024/07/20/use-git-submodule-manage-hexo-theme/</url>
+    <content><![CDATA[<p>Hexo 有很多主题，为了便于主题的及时更新，在多个不同的主题间随时切换，使用 Git 子模块来对这些主题进行管理</p>
+<span id="more"></span>
+
+<h3 id="1-使用方法"><a href="#1-使用方法" class="headerlink" title="1 使用方法"></a>1 使用方法</h3><h4 id="1-1-添加子模块"><a href="#1-1-添加子模块" class="headerlink" title="1.1 添加子模块"></a>1.1 添加子模块</h4><p>我们在本地构建好 Hexo 项目之后，一般来说，下一步就是选取一个今后自己博客使用的主题，这里以 next 为例，执行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加 next 主题作为该项目的 Git 子模块</span></span><br><span class="line">git submodule add https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<p>执行之后会在本地根路径生成一个 .gitmodules 文件，文件包含了 next 子模块的信息</p>
+<h4 id="1-2-拉取全部代码"><a href="#1-2-拉取全部代码" class="headerlink" title="1.2 拉取全部代码"></a>1.2 拉取全部代码</h4><p>包含子模块的 Git 项目，推送到远端仓库时，子模块中的代码并不会随父模块一起推送（远端仓库中的子模块目录是空的）</p>
+<p>当更换电脑，需要拉取 Hexo 笔记项目时，执行以下命令，便可拉取父模块和子模块的全部代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 拉取网址就是项目对应的 Repo 地址</span></span><br><span class="line">git <span class="built_in">clone</span> --recursive https://github.com/your-name/your-blog</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-本地更新主题版本"><a href="#1-3-本地更新主题版本" class="headerlink" title="1.3 本地更新主题版本"></a>1.3 本地更新主题版本</h4><p>执行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git submodule update --remote</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-问题"><a href="#2-问题" class="headerlink" title="2 问题"></a>2 问题</h3><h4 id="2-1-子模块主题配置文件不能直接修改"><a href="#2-1-子模块主题配置文件不能直接修改" class="headerlink" title="2.1 子模块主题配置文件不能直接修改"></a>2.1 子模块主题配置文件不能直接修改</h4><p>因为无论是 Push 不会推送子模块代码，Pull 也是从子模块原本的仓库中拉取，所以不能直接修改子模块中的代码</p>
+<p>以 next 主题为例，实测在 Hexo 博客项目的根目录创建一个 _config.next.yml 能覆盖主题文件中的配置，但是它这种覆盖，貌似是将两个配置合在一起，然后外面的 _config.next.yml 比里面的 _config.yml 的优先级更高</p>
+<p>另一种方式是通过安装 hexo 插件：<code>hexo-theme-plus</code></p>
+<p>因为我用到了 Github Action，我是在 CI 任务执行的过程中进行了主题配置文件的替换，这样也能达到主题部分自定义的目的了</p>
+<h3 id="3-参考"><a href="#3-参考" class="headerlink" title="3 参考"></a>3 参考</h3><ul>
+<li><a href="https://jiangtj.com/articles/beechnut/hexo-git-submodule/">使用Git Submodule管理Hexo主题 | Dnocm ☀</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CI 实战：使用 Github Action 跨仓库部署个人博客</title>
+    <url>/2024/07/20/use-github-action-deploy-blog-to-another-repo/</url>
+    <content><![CDATA[<p>使用两个仓库，一个为公开，另一个为私有</p>
+<p>私有的仓库存放 Hexo 博客项目，方便对笔记进行版本控制，另一方面，之后如果换电脑也方便迁移撰写环境。而公开的仓库专门存放生成的静态文件</p>
+<p>本地推送代码到私有仓库，之后触发 Github Actions，自动部署到公开仓库</p>
+<span id="more"></span>
+
+<h3 id="1-准备仓库"><a href="#1-准备仓库" class="headerlink" title="1 准备仓库"></a>1 准备仓库</h3><p>准备两个仓库，一个用来存 Hexo 博客项目，另一个用来存输出的静态文件</p>
+<ul>
+<li><code>my-blog</code></li>
+<li><code>&lt;your-name&gt;.github.io</code></li>
+</ul>
+<h3 id="2-生成密钥对"><a href="#2-生成密钥对" class="headerlink" title="2 生成密钥对"></a>2 生成密钥对</h3><blockquote>
+<p>ssh-keygen 是一个认证密钥的生成、管理和转换工具，生成的密钥对可用于远程服务器的连接</p>
+</blockquote>
+<p>在本地执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -f github-deploy-key</span><br></pre></td></tr></table></figure>
+
+<p>执行后，本地会生成两个文件：</p>
+<ul>
+<li>github-deploy-key</li>
+<li>github-deploy-key.pub</li>
+</ul>
+<h3 id="3-配置密钥"><a href="#3-配置密钥" class="headerlink" title="3 配置密钥"></a>3 配置密钥</h3><h4 id="3-1-配置私钥"><a href="#3-1-配置私钥" class="headerlink" title="3.1 配置私钥"></a>3.1 配置私钥</h4><p>私钥配置在 my-blog 仓库中</p>
+<p>首先，进入 New repository secret 添加页面：Settings &#x3D;&gt; Secrets and variables &#x3D;&gt; Actions，点击 New repository secret 添加私钥</p>
+<p><img src="https://img.jmingz.top/2024/07/a681850e8ea1e031bc4f56c75e93a7ff.png" alt="image-20240720000649412"></p>
+<h4 id="3-2-配置公钥"><a href="#3-2-配置公钥" class="headerlink" title="3.2 配置公钥"></a>3.2 配置公钥</h4><p>公钥配置在 <code>&lt;your-name&gt;.github.io</code> 仓库中</p>
+<p>进入 Deploy keys 的添加页面：Settings &#x3D;&gt; Deploy keys，点击 Add deploy key 添加公钥</p>
+<blockquote>
+<p>PS. 添加时需要勾选 Allow write access 选框</p>
+</blockquote>
+<h3 id="4-编写-Github-Actions"><a href="#4-编写-Github-Actions" class="headerlink" title="4 编写 Github Actions"></a>4 编写 Github Actions</h3><p>Github Actions 的配置文件是一个 yaml 文件，放置在 .github 下的 workflows 目录下</p>
+<p>首先，创建一个 yaml 文件，取名为 deploy.yml，在 deploy.yml 中添加以下内容：</p>
+<blockquote>
+<p>env 中替换成自己的，然后需要注意的是分支名，根据自己情况填写</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">CI</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"></span><br><span class="line"><span class="attr">env:</span></span><br><span class="line">  <span class="attr">GIT_USER:</span> <span class="string">your-name</span></span><br><span class="line">  <span class="attr">GIT_EMAIL:</span> <span class="string">your-email</span></span><br><span class="line">  <span class="attr">THEME_REPO:</span> <span class="string">theme-next/hexo-theme-next</span></span><br><span class="line">  <span class="attr">THEME_BRANCH:</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">DEPLOY_REPO:</span> <span class="string">your-name/your-name.github.io</span></span><br><span class="line">  <span class="attr">DEPLOY_BRANCH:</span> <span class="string">main</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">Build</span> <span class="string">on</span> <span class="string">node</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.node_version</span> <span class="string">&#125;&#125;</span> <span class="string">and</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.os</span> <span class="string">&#125;&#125;</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">strategy:</span></span><br><span class="line">      <span class="attr">matrix:</span></span><br><span class="line">        <span class="attr">os:</span> [<span class="string">ubuntu-latest</span>]</span><br><span class="line">        <span class="attr">node_version:</span> [<span class="number">18.18</span><span class="number">.0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span> <span class="string">theme</span> <span class="string">repo</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">repository:</span> <span class="string">$&#123;&#123;</span> <span class="string">env.THEME_REPO</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">ref:</span> <span class="string">$&#123;&#123;</span> <span class="string">env.THEME_BRANCH</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">themes/next</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Use</span> <span class="string">Node.js</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.node_version</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v4</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">$&#123;&#123;</span> <span class="string">matrix.node_version</span> <span class="string">&#125;&#125;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Configuration</span> <span class="string">environment</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">HEXO_DEPLOY_PRI:</span> <span class="string">$&#123;&#123;secrets.HEXO_DEPLOY_PRI&#125;&#125;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          sudo timedatectl set-timezone &quot;Asia/Shanghai&quot;</span></span><br><span class="line"><span class="string">          mkdir -p ~/.ssh/</span></span><br><span class="line"><span class="string">          echo &quot;$HEXO_DEPLOY_PRI&quot; &gt; ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          chmod 600 ~/.ssh/id_rsa</span></span><br><span class="line"><span class="string">          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span></span><br><span class="line"><span class="string">          git config --global user.name $GIT_USER</span></span><br><span class="line"><span class="string">          git config --global user.email $GIT_EMAIL</span></span><br><span class="line"><span class="string">          cp _config.next.yml themes/next/_config.yml</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">dependencies</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          yarn install</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">hexo</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">          <span class="string">npm</span> <span class="string">run</span> <span class="string">deploy</span></span><br></pre></td></tr></table></figure>
+
+<p>上述的 yaml.yml 文件需要根据自己的实际情况编写，上面大体上做了以下几件事：</p>
+<ul>
+<li>创建 ubuntu + node 环境</li>
+<li>从 my-blog 拉取代码</li>
+<li>拉取子模块主题项目的代码</li>
+<li>执行脚本。包括 git 的初始设置、私钥的设置以及主题配置文件的替换等</li>
+<li>安装依赖</li>
+<li>部署项目。这个是已经在 Hexo 配置文件中配置了 your-name.github.io 的 SSH 链接的，实际部署和本地的执行效果一样</li>
+</ul>
+<p>从本地到 your-name.github.io 仓库部署完成实际上有两个代码推送的过程，第一个是本地到 my-blog 仓库，另一个是从 Github Actions 临时构建的环境到 your-name.github.io 仓库</p>
+<p>至于为什么需要密钥对，其实就是为了能够通过 SSH 的方式去推送代码，好像还有一个 token 也可以实现类似的效果，不过我没试过，以后试试</p>
+<h3 id="5-参考"><a href="#5-参考" class="headerlink" title="5 参考"></a>5 参考</h3><ul>
+<li><a href="https://sanonz.github.io/2020/deploy-a-hexo-blog-from-github-actions/">利用 Github Actions 自动部署 Hexo 博客 | Sanonz</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Hexo 常用命令</title>
+    <url>/2024/07/20/useful-hexo-commands/</url>
+    <content><![CDATA[<p>日常使用频繁的 Hexo 命令</p>
+<span id="more"></span>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建博文</span></span><br><span class="line">hexo new [layout] &lt;title&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清除缓存文件</span></span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成静态文件</span></span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地预览</span></span><br><span class="line">hexo server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 部署</span></span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+  </entry>
+</search>

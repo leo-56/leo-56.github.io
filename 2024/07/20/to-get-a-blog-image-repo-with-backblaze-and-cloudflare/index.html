@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":10,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="对文章中图片的处理一直令我感到头痛。从最开始的放在本地，到使用 Github 图床，到使用七牛云 Kodo 图床 Github 图床的缺点是访问速度慢，Kodo 倒是配好之后一直很稳定，我已经使用很长一段时间了，因为一些特殊原因，还是决定忍痛对 Kodo 图床进行迁移，长痛不如短痛 在网上寻找合适的图床方案时，我发现了 BackBlaze + Cloudflare 这一解决方案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="博客图床方案：BackBlaze + Cloudflare">
+<meta property="og:url" content="http://example.com/2024/07/20/to-get-a-blog-image-repo-with-backblaze-and-cloudflare/index.html">
+<meta property="og:site_name" content="JM&#39;s Blog">
+<meta property="og:description" content="对文章中图片的处理一直令我感到头痛。从最开始的放在本地，到使用 Github 图床，到使用七牛云 Kodo 图床 Github 图床的缺点是访问速度慢，Kodo 倒是配好之后一直很稳定，我已经使用很长一段时间了，因为一些特殊原因，还是决定忍痛对 Kodo 图床进行迁移，长痛不如短痛 在网上寻找合适的图床方案时，我发现了 BackBlaze + Cloudflare 这一解决方案">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.jmingz.top/2024/07/21494ae27304d3d1931bcfa0840df56e.png">
+<meta property="og:image" content="https://img.jmingz.top/2024/07/c3c4f3d96898515b9f83efc26fcf059c.png">
+<meta property="og:image" content="https://img.jmingz.top/2024/07/cb625e804536738d2561e22ed84f5255.png">
+<meta property="og:image" content="https://img.jmingz.top/2024/07/3bee363eeb10fa85b8734cbc8a76c192.png">
+<meta property="og:image" content="https://img.jmingz.top/2024/07/5714a9be34bdd317a761320de326fbf6.png">
+<meta property="og:image" content="https://img.jmingz.top/2024/07/db0332194f042e00ef779722304dec95.png">
+<meta property="og:image" content="https://img.jmingz.top/2024/07/f78f3e68548be977ae24ff3b4ccd6786.png">
+<meta property="og:image" content="https://img.jmingz.top/2024/07/0f048c1db10b9b07c7f152a11d221316.png">
+<meta property="article:published_time" content="2024-07-19T16:51:23.000Z">
+<meta property="article:modified_time" content="2024-07-25T06:16:36.600Z">
+<meta property="article:author" content="JM">
+<meta property="article:tag" content="图床">
+<meta property="article:tag" content="BackBlaze">
+<meta property="article:tag" content="Cloudflare">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.jmingz.top/2024/07/21494ae27304d3d1931bcfa0840df56e.png">
+
+<link rel="canonical" href="http://example.com/2024/07/20/to-get-a-blog-image-repo-with-backblaze-and-cloudflare/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>博客图床方案：BackBlaze + Cloudflare | JM's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JM's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/20/to-get-a-blog-image-repo-with-backblaze-and-cloudflare/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="JM">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JM's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          博客图床方案：BackBlaze + Cloudflare
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-20 00:51:23" itemprop="dateCreated datePublished" datetime="2024-07-20T00:51:23+08:00">2024-07-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" itemprop="url" rel="index"><span itemprop="name">解决方案</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>对文章中图片的处理一直令我感到头痛。从最开始的放在本地，到使用 Github 图床，到使用七牛云 Kodo 图床</p>
+<p>Github 图床的缺点是访问速度慢，Kodo 倒是配好之后一直很稳定，我已经使用很长一段时间了，因为一些特殊原因，还是决定忍痛对 Kodo 图床进行迁移，长痛不如短痛</p>
+<p>在网上寻找合适的图床方案时，我发现了 BackBlaze + Cloudflare 这一解决方案</p>
+<span id="more"></span>
+
+<h3 id="1-创建-Public-Bucket"><a href="#1-创建-Public-Bucket" class="headerlink" title="1 创建 Public Bucket"></a>1 创建 Public Bucket</h3><p>首先创建一个 BackBlaze 账号，之后在 B2 Cloud Storage 中创建 Bucket</p>
+<p>需要修改两个地方：</p>
+<ul>
+<li>一个是填写一个 Bucket Name，这个很重要，可以在 <a target="_blank" rel="noopener" href="https://suijimimashengcheng.bmcx.com/">这里</a> 创建一个短密码填到这个地方</li>
+<li>另一个地方是将 Files in Bucket are 这里选择 Public</li>
+</ul>
+<p>其他的地方不用动</p>
+<blockquote>
+<p>第一次使用时，这里需要充 1 美元，充值方式支持 Visa 卡，但不支持 Paypal，使用国内办理的 Visa 卡也是可以的</p>
+</blockquote>
+<p><img src="https://img.jmingz.top/2024/07/21494ae27304d3d1931bcfa0840df56e.png" alt="image-20240719205540713"></p>
+<h3 id="2-获取-Bucket-信息"><a href="#2-获取-Bucket-信息" class="headerlink" title="2 获取 Bucket 信息"></a>2 获取 Bucket 信息</h3><p>创建好 Bucket 后，上传一张图片，点击图片后，在弹出的 Details 框中找到 Friendly URL：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://f005.backblazeb2.com/file/a-unique-bucket-name/test.jpg</span><br></pre></td></tr></table></figure>
+
+<p>之后使用自己域名访问时需要用到上面的东西：</p>
+<ul>
+<li><code>f005.backblazeb2.com</code>（这个可能会有差异，以自己的为准）</li>
+<li><code>file/a-unique-bucket-name</code>（这个就是固定的 file 和之前设置的 Bucket 名）</li>
+</ul>
+<h3 id="3-配置-Cloudflare"><a href="#3-配置-Cloudflare" class="headerlink" title="3 配置 Cloudflare"></a>3 配置 Cloudflare</h3><p>想要配置 Cloudflare 之前，首先要有一个 CF 账号，注册账号无需赘言</p>
+<h4 id="3-1-添加站点"><a href="#3-1-添加站点" class="headerlink" title="3.1 添加站点"></a>3.1 添加站点</h4><p>将之前购买的域名添加到 CloudFlare 中，以 SpaceShip 为例，在购买域名后，只需要将 SpaceShip 中域名的 Nameserver 改成从 CF 得到的就可以了</p>
+<p>之后就等待站点激活即可</p>
+<h4 id="3-2-设置-SSL-加密模式"><a href="#3-2-设置-SSL-加密模式" class="headerlink" title="3.2 设置 SSL 加密模式"></a>3.2 设置 SSL 加密模式</h4><p>将 SSL 加密模式设置为 <strong>完全（严格）</strong></p>
+<blockquote>
+<p>😉 这个设置是必要的，以下设置让 CF 服务器通过 HTTPS 与 BackBlaze 发送请求，若不做该设置，将会出现返回 404 的情况</p>
+</blockquote>
+<p><img src="https://img.jmingz.top/2024/07/c3c4f3d96898515b9f83efc26fcf059c.png" alt="image-20240719205144253"></p>
+<h4 id="3-3-配置二级域名访问图片"><a href="#3-3-配置二级域名访问图片" class="headerlink" title="3.3 配置二级域名访问图片"></a>3.3 配置二级域名访问图片</h4><h5 id="3-3-1-添加域名解析记录"><a href="#3-3-1-添加域名解析记录" class="headerlink" title="3.3.1 添加域名解析记录"></a>3.3.1 添加域名解析记录</h5><p>首先，在 DNS 解析中，添加一条 CNAME 记录，将一个二级域名（例如 img.jmingz.top）指向之前获取的 Bucket 信息中的主机名 <code>f005.backblazeb2.com</code>，并开启 CF 代理（开启橘色小云朵）</p>
+<h5 id="3-3-2-添加转换规则"><a href="#3-3-2-添加转换规则" class="headerlink" title="3.3.2 添加转换规则"></a>3.3.2 添加转换规则</h5><p>添加转换规则可以实现图片的访问路径缩短，隐藏 Bucket 名：</p>
+<p><code>https://f005.backblazeb2.com/file/a-unique-bucket-name/test.jpg</code> &#x3D;&#x3D;&gt; <code>https://img.jmingz.top/test.jpg</code></p>
+<p>首先进入转换规则的编辑页面：规则 &#x3D;&gt; 转换规则 &#x3D;&gt; 重写 URL</p>
+<p><img src="https://img.jmingz.top/2024/07/cb625e804536738d2561e22ed84f5255.png" alt="image-20240719212446662"></p>
+<p>下面填写的是 <code>concat(&quot;/file/a-unique-bucket-name&quot;,http.request.uri.path)</code></p>
+<p><img src="https://img.jmingz.top/2024/07/3bee363eeb10fa85b8734cbc8a76c192.png" alt="image-20240719212546371"></p>
+<h4 id="3-4-防盗链设置"><a href="#3-4-防盗链设置" class="headerlink" title="3.4 防盗链设置"></a>3.4 防盗链设置</h4><blockquote>
+<p>😄 实现可在本地正常显示图片并且在白名单站点中正常显示</p>
+</blockquote>
+<p>进入防火墙的自定义规则编辑中：安全性 &#x3D;&gt; WAF &#x3D;&gt; 自定义规则</p>
+<p>创建第一条规则：</p>
+<p><img src="https://img.jmingz.top/2024/07/5714a9be34bdd317a761320de326fbf6.png" alt="image-20240719214700679"></p>
+<p>创建第二条规则：</p>
+<p><img src="https://img.jmingz.top/2024/07/db0332194f042e00ef779722304dec95.png" alt="image-20240719214821991"></p>
+<h4 id="3-5-设置页面规则"><a href="#3-5-设置页面规则" class="headerlink" title="3.5 设置页面规则"></a>3.5 设置页面规则</h4><p>进入页面规则设置界面：规则 &#x3D;&gt; 页面规则</p>
+<p>URL 中填写 <code>https://your-second-domain/file/a-unique-bucket-name/*</code></p>
+<p><img src="https://img.jmingz.top/2024/07/f78f3e68548be977ae24ff3b4ccd6786.png" alt="image-20240719215407025"></p>
+<p>进入到 BackBlaze 的 Bucket 设置中，在 Bucket info 中填写 <code>&#123;&quot;cache-control&quot;:&quot;max-age=720000&quot;&#125;</code></p>
+<h3 id="4-去除不必要的响应-Header"><a href="#4-去除不必要的响应-Header" class="headerlink" title="4 去除不必要的响应 Header"></a>4 去除不必要的响应 Header</h3><p>TODO</p>
+<h3 id="5-PicGo-设置"><a href="#5-PicGo-设置" class="headerlink" title="5 PicGo 设置"></a>5 PicGo 设置</h3><p>PicGo 需要安装一个插件</p>
+<p><img src="https://img.jmingz.top/2024/07/0f048c1db10b9b07c7f152a11d221316.png" alt="image-20240719220546982"></p>
+<p>另外，需要配置的项有：</p>
+<ul>
+<li>应用密钥 ID（在 BackBlaze 中的 Application Keys 生成）</li>
+<li>应用密钥（在 BackBlaze 中的 Application Keys 生成）</li>
+<li>桶名</li>
+<li>文件路径（默认值就可以了）</li>
+<li>自定义节点（endpoint）</li>
+<li>自定义域名（填之前做过解析的二级域名）</li>
+</ul>
+<blockquote>
+<p>注意：自定义节点前要加 <code>https://</code> 否则会报错</p>
+</blockquote>
+<h3 id="6-参考"><a href="#6-参考" class="headerlink" title="6 参考"></a>6 参考</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://leonis.cc/sui-sui-nian/2023-11-17-deploy-backblaze-image-hosting.html">Cloudflare + Backblaze 实现免费的博客图床方案 - Leo’s blog</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.xiaoz.org/archives/17544/comment-page-1">通过CloudFlare转换规则隐藏Backblaze B2的bucket路径 - 小z博客</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%BE%E5%BA%8A/" rel="tag"># 图床</a>
+              <a href="/tags/BackBlaze/" rel="tag"># BackBlaze</a>
+              <a href="/tags/Cloudflare/" rel="tag"># Cloudflare</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/20/network-useful-tools-link-list/" rel="prev" title="方便的网络工具">
+      <i class="fa fa-chevron-left"></i> 方便的网络工具
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/20/use-git-submodule-manage-hexo-theme/" rel="next" title="使用 Git 子模块管理 Hexo 的多个主题">
+      使用 Git 子模块管理 Hexo 的多个主题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA-Public-Bucket"><span class="nav-text">1 创建 Public Bucket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%8E%B7%E5%8F%96-Bucket-%E4%BF%A1%E6%81%AF"><span class="nav-text">2 获取 Bucket 信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE-Cloudflare"><span class="nav-text">3 配置 Cloudflare</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E6%B7%BB%E5%8A%A0%E7%AB%99%E7%82%B9"><span class="nav-text">3.1 添加站点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E8%AE%BE%E7%BD%AE-SSL-%E5%8A%A0%E5%AF%86%E6%A8%A1%E5%BC%8F"><span class="nav-text">3.2 设置 SSL 加密模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E9%85%8D%E7%BD%AE%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%9B%BE%E7%89%87"><span class="nav-text">3.3 配置二级域名访问图片</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-1-%E6%B7%BB%E5%8A%A0%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%AE%B0%E5%BD%95"><span class="nav-text">3.3.1 添加域名解析记录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-2-%E6%B7%BB%E5%8A%A0%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99"><span class="nav-text">3.3.2 添加转换规则</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-%E9%98%B2%E7%9B%97%E9%93%BE%E8%AE%BE%E7%BD%AE"><span class="nav-text">3.4 防盗链设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-%E8%AE%BE%E7%BD%AE%E9%A1%B5%E9%9D%A2%E8%A7%84%E5%88%99"><span class="nav-text">3.5 设置页面规则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%8E%BB%E9%99%A4%E4%B8%8D%E5%BF%85%E8%A6%81%E7%9A%84%E5%93%8D%E5%BA%94-Header"><span class="nav-text">4 去除不必要的响应 Header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-PicGo-%E8%AE%BE%E7%BD%AE"><span class="nav-text">5 PicGo 设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%8F%82%E8%80%83"><span class="nav-text">6 参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">JM</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JM</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">6k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6 分钟</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
